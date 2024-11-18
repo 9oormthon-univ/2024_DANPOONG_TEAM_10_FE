@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 
-export default function AppLayout() {
+export default function AppLayout({ children }: any) {
   // screenOptions : expo-router설정
   // headerShone : 현재 페이지 확인 기능
   return (
@@ -8,6 +8,8 @@ export default function AppLayout() {
       screenOptions={{
         headerShown: false,
       }}
-    ></Stack>
+    >
+      {children}
+    </Stack>
   );
 }
