@@ -8,7 +8,7 @@ export default function PagesLayout() {
   return (
     <View className="flex-1">
       {/* 헤더 들어가는 부분 */}
-      <View className="h-20 ">
+      <View className="h-20 mt-20">
         <Header left={<FontText>{'< Header'}</FontText>} />
       </View>
 
