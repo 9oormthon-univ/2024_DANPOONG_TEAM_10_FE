@@ -12,5 +12,5 @@ export default function App() {
   }, []);
   // 작업 테스트용 라우팅
 
-  return <FontText>jasdiofj</FontText>;
+  return <FontText>Index</FontText>;
 }
