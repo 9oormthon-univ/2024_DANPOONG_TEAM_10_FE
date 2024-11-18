@@ -9,7 +9,8 @@ export default function Navbar() {
         <FontText>홈</FontText>
       </TouchableOpacity>
       <TouchableOpacity className="flex-1 items-center justify-center">
-        <Image />ㄴ<FontText>좋아요</FontText>
+        <Image />
+        <FontText>좋아요</FontText>
       </TouchableOpacity>
       <TouchableOpacity className="flex-1 items-center justify-center">
         <Image />
