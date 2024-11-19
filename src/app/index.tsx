@@ -1,29 +1,23 @@
-//첫 화면
-import FontText from "@/components/theme/FontText";
-import { View, Text, TouchableOpacity } from "react-native";
-import { router } from "expo-router";
+import FontText from '@/components/theme/FontText';
+import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
+import { View } from "react-native";
 
 export default function App() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <FontText>홈 화면</FontText>
-      <TouchableOpacity
-        onPress={() => router.push("pages/Account/Account")}
-        style={{
-          marginTop: 20,
-          padding: 10,
-          backgroundColor: "#007bff",
-          borderRadius: 5,
-        }}
-      >
-        <FontText style={{ color: "#fff" }}>로그인으로 이동</FontText>
-      </TouchableOpacity>
-    </View>
-  );
+  // 작업 테스트용 라우팅
+  const router = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+      router.replace('/pages/Account/Account');
+    }, 1000);
+  }, []);
+  // 작업 테스트용 라우팅
+
+  return  (
+    <View>
+      <Link href="/pages/Account/Account">Account</Link>
+      <FontText>Index</FontText>;
+      </View>
+    );
+
 }

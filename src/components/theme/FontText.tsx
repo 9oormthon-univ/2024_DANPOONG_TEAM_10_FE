@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 
 interface ThemedTextProps {
-  children: string;
+  children: string| React.ReactNode;
   style?: object;
   //   bold?: boolean | undefined;
 }

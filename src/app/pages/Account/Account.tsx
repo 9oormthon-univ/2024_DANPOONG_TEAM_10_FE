@@ -1,5 +1,4 @@
-//로그인페이지
-import FontText from "@/components/theme/FontText";
+//로그인 페이지
 import { View , Image, TouchableOpacity} from "react-native";
 import { router } from 'expo-router';
 
@@ -9,16 +8,13 @@ export default function Account() {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
+      gap:200,
     }}>
       {/* logo */}
-      <FontText>누구에게나 만족을 선사하는 오달지다</FontText>
-
+      <Image source={require('@/assets/logo.png')} />
+      
       {/* LoginButton */}
       <TouchableOpacity 
-      style={{
-        
-      marginTop: 100,
-      }}
       onPress={() => router.push('pages/Signup/Signup')}>
         <Image source={require('@/assets/kakao-login.png')} />
       </TouchableOpacity>
