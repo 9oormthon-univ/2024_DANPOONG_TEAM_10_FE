@@ -70,9 +70,7 @@ export default function Review() {
 
   return (
     <View className="flex-1">
-      <View className="h-20 mt-20">
-        <Header left={<FontText>{'< Header'}</FontText>} />
-      </View>
+      <Header left={<FontText>{'< Header'}</FontText>} />
       <View className="flex-1">
         <ScrollView>
           <View className="m-7 h-32 border-2 items-center justify-center gap-3">
