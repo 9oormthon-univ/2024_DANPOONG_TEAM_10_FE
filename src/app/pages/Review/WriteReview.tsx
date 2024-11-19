@@ -52,8 +52,9 @@ export default function WriteReview() {
         <View className="flex-1 gap-3 justify-center">
           <FontText>이 축제에 얼마나 만족하시나요?</FontText>
           <View className="flex-row gap-1">
-            {Array.from({ length: 5 }).map((s, i) => (
+            {Array.from({ length: 5 }).map((_, i) => (
               <TouchableOpacity
+                key={i}
                 onPress={() => {
                   setStars(i + 1);
                 }}
