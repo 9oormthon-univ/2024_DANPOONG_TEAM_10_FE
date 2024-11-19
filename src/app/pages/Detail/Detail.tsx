@@ -2,9 +2,10 @@ import Hr from '@/components/Hr';
 import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
 import { useEffect, useState } from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import Map from './Map';
 import CustomMap from './CustomMap';
+import { useRouter } from 'expo-router';
 
 type ReviewType = {
   profile: string;
@@ -15,11 +16,14 @@ type ReviewType = {
 
 export default function Detail() {
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
+  const router = useRouter();
 
+  // 데이터 불러오기
   const fetchData = async () => {
     setReviewList([]);
   };
 
+  // 더미데이터 입력
   useEffect(() => {
     setReviewList([
       {
@@ -61,6 +65,11 @@ export default function Detail() {
     ]);
   }, []);
 
+  // 리뷰 페이지로 이동
+  const goReview = () => {
+    router.push('/pages/Review');
+  };
+
   return (
     <View className="flex-1">
       <ScrollView>
@@ -70,7 +79,9 @@ export default function Detail() {
         </View>
         <Hr />
         <View className="flex-1 p-5 min-h-32">
-          <FontText>방문자 리뷰</FontText>
+          <TouchableOpacity className="py-4" onPress={goReview}>
+            <FontText>방문자 리뷰</FontText>
+          </TouchableOpacity>
           <View className="flex-1">
             <ScrollView horizontal contentContainerStyle={{ gap: 20 }}>
               {reviewList.length !== 0 &&
