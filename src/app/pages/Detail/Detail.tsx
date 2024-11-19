@@ -16,6 +16,7 @@ type ReviewType = {
   content: string;
 };
 
+// 축제 상세 페이지
 export default function Detail() {
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
   const router = useRouter();

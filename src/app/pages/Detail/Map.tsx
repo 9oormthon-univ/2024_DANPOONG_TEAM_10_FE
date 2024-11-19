@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
 import * as Location from 'expo-location';
+
+// 축제 위치를 표시하는 지도
 export default function Map() {
   const webViewRef = useRef<WebView>(null);
   // GPS 현위치를 불러오는 함수 -> 서버에서 지도 위치 불러오기
@@ -28,6 +30,7 @@ export default function Map() {
       );
     }
   };
+
   return (
     <View className="flex-1 rounded-xl overflow-hidden ">
       <WebView

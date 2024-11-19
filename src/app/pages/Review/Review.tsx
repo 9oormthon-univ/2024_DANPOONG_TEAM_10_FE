@@ -17,11 +17,12 @@ type ReviewType = {
 };
 
 export default function Review() {
+  const router = useRouter();
   // 리뷰 리스트
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
-  const router = useRouter();
 
-  const setLike = (index: number, isLike: boolean) => {
+  // 좋아요 버튼 클릭 헨들러
+  const onLikeClick = (index: number, isLike: boolean) => {
     setReviewList((prev) => {
       const temp = [...prev];
       temp[index].isLiked = isLike;
@@ -104,7 +105,7 @@ export default function Review() {
                     {review.isLiked ? (
                       <TouchableOpacity
                         onPress={() => {
-                          setLike(i, false);
+                          onLikeClick(i, false);
                         }}
                         className="h-5 w-5 border-2 bg-black"
                       >
@@ -113,7 +114,7 @@ export default function Review() {
                     ) : (
                       <TouchableOpacity
                         onPress={() => {
-                          setLike(i, true);
+                          onLikeClick(i, true);
                         }}
                         className="h-5 w-5 border-2"
                       >
