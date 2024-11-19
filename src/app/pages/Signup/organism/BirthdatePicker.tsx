@@ -79,10 +79,6 @@ const BirthdatePicker: React.FC = () => {
           selectedItemLabelStyle={pickerStyles.selectedItemStyle}
         />
       </View>
-
-      <FontText>
-        선택한 날짜: {year || "연도"}-{month || "월"}-{day || "일"}
-      </FontText>
     </View>
   );
 };
@@ -107,8 +103,6 @@ const styles = StyleSheet.create({
 
 const pickerStyles = StyleSheet.create({
   container: {
-    width: 102,
-    height: 36,
     backgroundColor:"#F2F2F2",
     borderColor: "#E9EBED",
     borderWidth: 1,

@@ -1,6 +1,6 @@
 import FontText from "@/components/theme/FontText";
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Image } from 'react-native';
 
 const SignupForm: React.FC = () => {
   const [name, setName] = useState<string>('');;
@@ -15,17 +15,30 @@ const SignupForm: React.FC = () => {
         onChangeText={setName}
         placeholderTextColor="#9FA4A9"
       />
+      <View style={{ flexDirection: "row", alignItems:"center"}}>
+  <Image
+    source={require('@/assets/check-icon.png')}
+    style={{ marginRight: 4 }}
+  />
+  <FontText style={{ color: "#053C57" , fontsize:12}}>사용 가능한 닉네임 입니다.</FontText>
+</View>
+<View style={{ flexDirection: "row", alignItems:"center"}}>
+  <Image
+    source={require('@/assets/warning-icon.png')}
+    style={{ marginRight: 4}}
+  />
+  <FontText style={{ color: "#053C57" , fontsize:12}}>사용 불가능한 닉네임 입니다.</FontText>
+</View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width:'100%',
+    width:"100%",
     justifyContent: 'center',
   },
   input: {
-    width:'100%',
     height: 36,
     borderColor: '#E9EBED',
     borderWidth: 1,
