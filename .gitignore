@@ -41,5 +41,5 @@ ios/
 # android 빌드 파일 제외
 android/
 
-# kakaomap test
+# kakao map test
 test.html
