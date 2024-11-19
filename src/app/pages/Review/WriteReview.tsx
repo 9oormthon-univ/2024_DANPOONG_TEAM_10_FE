@@ -1,6 +1,5 @@
 import Header from '@/components/layouts/Header';
 import Profile from '@/components/Profile';
-import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
 import { useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
@@ -10,6 +9,10 @@ import { Image } from 'expo-image';
 export default function WriteReview() {
   // 사용자 입력 이미지
   const [image, setImage] = useState<string | null>(null);
+  // 사용자 선택 별점
+  const [stars, setStars] = useState<number>(0);
+  // 사용자 입력 리뷰
+  const [content, setContent] = useState<string>('');
 
   // 사용자로부터 이미지를 입력받는 함수
   const pickImage = async () => {
@@ -48,9 +51,24 @@ export default function WriteReview() {
         </View>
         <View className="flex-1 gap-3 justify-center">
           <FontText>이 축제에 얼마나 만족하시나요?</FontText>
-          <Stars count={4} />
+          <View className="flex-row gap-1">
+            {Array.from({ length: 5 }).map((s, i) => (
+              <TouchableOpacity
+                onPress={() => {
+                  setStars(i + 1);
+                }}
+              >
+                {i < stars ? (
+                  <View className="h-3 w-3 bg-black rounded-full" />
+                ) : (
+                  <View className="h-3 w-3 bg-gray-400 rounded-full" />
+                )}
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
         <TextInput
+          onChangeText={setContent}
           multiline
           textAlignVertical="top"
           className="flex-[3] border-2 p-2"
