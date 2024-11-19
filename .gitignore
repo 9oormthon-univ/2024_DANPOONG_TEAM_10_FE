@@ -35,3 +35,11 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# ios 빌드 파일 제외
+ios/
+# android 빌드 파일 제외
+android/
+
+# kakao map test
+test.html
