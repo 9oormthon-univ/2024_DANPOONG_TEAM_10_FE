@@ -69,7 +69,7 @@ export default function Detail() {
 
   // 리뷰 페이지로 이동
   const goReview = () => {
-    router.push('/pages/Review');
+    router.push('/pages/Review/Review');
   };
 
   return (
