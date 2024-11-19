@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
 import * as Location from 'expo-location';
 
@@ -17,51 +18,37 @@ export default function Map() {
     }
   };
 
+  // 서버에서 지도 좌표를 가져오는 함수
+  const fetchData = async () => {};
+
   // 페이지를 불러온 후 webview에서 실행되는 함수
   const onLoaded = async () => {
     const { latitude, longitude } = await getCurrentLoc();
     if (!latitude || !longitude) return;
 
-    // kakao map 생성
-    const script = `
-    // 지도 생성
-    const container = document.getElementById('map');
-    const options = {
-        center: new kakao.maps.LatLng(${latitude}, ${longitude}),
-        level: 5,
-    };
-    const map = new kakao.maps.Map(container, options); 
-
-    // 마커 생성
-    const markerPos = new kakao.maps.LatLng(${latitude}, ${longitude});
-    const marker = new kakao.maps.Marker({
-    position: markerPos,
-    });
-    marker.setMap(map);
-    
-    // 커스텀 오버레이
-    const position = new kakao.maps.LatLng(${latitude}, ${longitude});
-    const content = '<div style="background: white;  padding: 10px 30px; box-shadow: 0 0 5px grey; border-radius:5px; text-align:center">시청역</div>';
-    const customOverlay = new kakao.maps.CustomOverlay({
-        map:map,
-        position:position,
-        content:content,
-        yAnchor:2
-    })
-    `;
-
+    // webview의 Initmap 함수 실행
     if (webViewRef.current) {
-      webViewRef.current.injectJavaScript(script);
+      webViewRef.current.injectJavaScript(
+        `window.initMap(${latitude}, ${longitude})`
+      );
     }
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      originWhitelist={['*']}
-      javaScriptEnabled={true}
-      source={require('./kakaomap.html')}
-      onLoadEnd={onLoaded}
-    />
+    <View className="flex-1 rounded-xl overflow-hidden ">
+      <WebView
+        ref={webViewRef}
+        originWhitelist={['*']}
+        javaScriptEnabled={true}
+        source={require('./kakaomap.html')}
+        onMessage={(message) => {
+          const { nativeEvent } = message;
+          console.log('map script :', nativeEvent.data);
+          if (nativeEvent.data === 'loaded') {
+            onLoaded();
+          }
+        }}
+      />
+    </View>
   );
 }

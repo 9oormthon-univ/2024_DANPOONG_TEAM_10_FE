@@ -10,10 +10,12 @@ export default function Stars({ count }: { count: number }) {
   });
 
   return (
-    <View className="flex-row">
+    <View className="flex-row gap-1">
       {starsList.map((star, i) => {
-        if (star) return <Image key={i} />;
-        else return <Image key={i} />;
+        if (star)
+          return <View key={i} className="h-3 w-3 bg-black rounded-full" />;
+        else
+          return <View key={i} className="h-3 w-3 bg-gray-400 rounded-full" />;
       })}
     </View>
   );
