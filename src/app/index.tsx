@@ -1,12 +1,17 @@
-import FontText from "@/components/theme/FontText";
-import { View } from "react-native";
-import { Link } from 'expo-router';
+import FontText from '@/components/theme/FontText';
+import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 
 export default function App() {
-  return (
-  <View>
-    <Link href="/pages/Account/Account">About</Link>
-    <FontText>jasdiofj</FontText>
-    </View>
-  );
+  // 작업 테스트용 라우팅
+  const router = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+      router.replace('/pages/Detail/Detail');
+    }, 1000);
+  }, []);
+  // 작업 테스트용 라우팅
+
+  return <FontText>Index</FontText>;
 }
+
