@@ -7,6 +7,7 @@ import Map from './Map';
 import CustomMap from './CustomMap';
 import { useRouter } from 'expo-router';
 import Profile from '@/components/Profile';
+import Header from '@/components/layouts/Header';
 
 type ReviewType = {
   profile: string;
@@ -73,6 +74,7 @@ export default function Detail() {
 
   return (
     <View className="flex-1">
+      <Header left={<FontText>{'< Header'}</FontText>} />
       <ScrollView>
         <View className="flex-1 p-5 min-h-72">
           <FontText>축제 지도</FontText>
