@@ -1,5 +1,4 @@
-//로그인페이지
-import FontText from "@/components/theme/FontText";
+//로그인 페이지
 import { View , Image, TouchableOpacity} from "react-native";
 import { router } from 'expo-router';
 
@@ -13,6 +12,7 @@ export default function Account() {
     }}>
       {/* logo */}
       <Image source={require('@/assets/logo.png')} />
+      
       {/* LoginButton */}
       <TouchableOpacity 
       onPress={() => router.push('pages/Signup/Signup')}>
