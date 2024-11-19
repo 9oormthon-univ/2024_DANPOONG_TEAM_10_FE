@@ -6,6 +6,7 @@ import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import Map from './Map';
 import CustomMap from './CustomMap';
 import { useRouter } from 'expo-router';
+import Profile from '@/components/Profile';
 
 type ReviewType = {
   profile: string;
@@ -86,11 +87,11 @@ export default function Detail() {
             <ScrollView horizontal contentContainerStyle={{ gap: 20 }}>
               {reviewList.length !== 0 &&
                 reviewList.map((review, i) => (
-                  <View className="border-2 rounded-xl p-5" key={i}>
-                    <View className="flex-row">
-                      <View className="h-10 w-10 bg-black rounded-full" />
-                      <FontText>{review.nickname}</FontText>
-                    </View>
+                  <View className="border-2 rounded-xl p-3 gap-2" key={i}>
+                    <Profile
+                      image={review.profile}
+                      nickname={review.nickname}
+                    />
                     <Stars count={review.stars} />
                     <FontText>{`"${review.content}"`}</FontText>
                   </View>
