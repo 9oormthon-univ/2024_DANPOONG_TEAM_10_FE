@@ -2,6 +2,7 @@ import Header from '@/components/layouts/Header';
 import Profile from '@/components/Profile';
 import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
+import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 
@@ -16,10 +17,12 @@ type ReviewType = {
 };
 
 export default function Review() {
+  const router = useRouter();
   // 리뷰 리스트
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
 
-  const setLike = (index: number, isLike: boolean) => {
+  // 좋아요 버튼 클릭 헨들러
+  const onLikeClick = (index: number, isLike: boolean) => {
     setReviewList((prev) => {
       const temp = [...prev];
       temp[index].isLiked = isLike;
@@ -68,6 +71,10 @@ export default function Review() {
     fetchData();
   }, []);
 
+  const goWriteReview = () => {
+    router.push('pages/Review/WriteReview');
+  };
+
   return (
     <View className="flex-1">
       <Header left={<FontText>{'< Header'}</FontText>} />
@@ -75,7 +82,10 @@ export default function Review() {
         <ScrollView>
           <View className="m-7 h-32 border-2 items-center justify-center gap-3">
             <FontText>이 축제에 방문하셨나요?</FontText>
-            <TouchableOpacity className="bg-cyan-950 py-2 px-5 rounded-full">
+            <TouchableOpacity
+              onPress={goWriteReview}
+              className="bg-cyan-950 py-2 px-5 rounded-full"
+            >
               <FontText style={{ color: 'white' }}>리뷰 작성하기</FontText>
             </TouchableOpacity>
           </View>
@@ -95,7 +105,7 @@ export default function Review() {
                     {review.isLiked ? (
                       <TouchableOpacity
                         onPress={() => {
-                          setLike(i, false);
+                          onLikeClick(i, false);
                         }}
                         className="h-5 w-5 border-2 bg-black"
                       >
@@ -104,7 +114,7 @@ export default function Review() {
                     ) : (
                       <TouchableOpacity
                         onPress={() => {
-                          setLike(i, true);
+                          onLikeClick(i, true);
                         }}
                         className="h-5 w-5 border-2"
                       >
