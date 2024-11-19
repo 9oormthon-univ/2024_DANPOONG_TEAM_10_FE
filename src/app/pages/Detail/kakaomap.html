@@ -1,0 +1,84 @@
+<html style="margin:0">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5a67d44c74ee03d066c3323402adb3a"></script>
+</head>
+  </head>
+  <body style="margin:0">
+    <div id="map" style="width: 100vw; height: 100vh; background:teal;"></div>
+
+    <script type="text/javascript">
+      // html 로드 완료를 확인하는 함수
+      function onload (){
+        window.ReactNativeWebView.postMessage('loaded');
+      }
+
+      window.onload = onload();
+
+      // function loadKakaoMapScript() {
+      //   return new Promise((resolve, reject) => {
+      //     const script = document.createElement('script');
+      //     script.type = "text/javascript";
+      //     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=e5a67d44c74ee03d066c3323402adb3a`;
+      //     script.onload = () => {setTimeout(()=>{
+            
+      //       window.ReactNativeWebView.postMessage("ok");
+      //       resolve();
+      //     },1000)}
+      //     script.onerror = () => reject(new Error('Failed to load Kakao Map API script'));
+      //     document.head.appendChild(script);
+      //   });
+      // }
+
+      // 지도를 만드는 함수
+      function makeMap(latitude,longitude) {
+        // window.ReactNativeWebView.postMessage(JSON.stringify({kakao : kakao.maps}));
+        //   if(kakao.maps.LatLng== undefined){
+        //     window.ReactNativeWebView.postMessage("NULL");
+        //     return;
+        //   }
+
+          // 지도 생성
+          const container = document.getElementById('map');
+
+          const options = {
+            center: new kakao.maps.LatLng(latitude, longitude),
+            level: 4,
+          };
+          const map = new kakao.maps.Map(container, options);
+
+          // 마커 생성
+          const markerPos = new kakao.maps.LatLng(latitude, longitude);
+          const marker = new kakao.maps.Marker({
+            position: markerPos,
+          });
+          marker.setMap(map);
+
+          // 커스텀 오버레이
+          const position = new kakao.maps.LatLng(latitude, longitude);
+          const content =
+            '<div style="background: white;  padding: 10px 30px; box-shadow: 0 0 5px grey; border-radius:5px; text-align:center">현위치</div>';
+          const customOverlay = new kakao.maps.CustomOverlay({
+            map: map,
+            position: position,
+            content: content,
+            yAnchor: 3,
+          });
+        
+      }
+
+      // 카카오맵을 불러오고, 지도를 그리는 함수
+      function initMap(latitude, longitude){
+        
+        // loadKakaoMapScript().then(()=>{
+        //   makeMap(latitude, longitude);
+        // }).catch((err)=>{alert(err)});
+        makeMap(latitude, longitude);
+      }
+      window.initMap = initMap;
+
+      </script>
+      
+  </body>
+</html>
