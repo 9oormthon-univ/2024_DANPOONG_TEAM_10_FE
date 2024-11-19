@@ -1,6 +1,7 @@
 import FontText from '@/components/theme/FontText';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useEffect } from 'react';
+import { View } from "react-native";
 
 export default function App() {
   // 작업 테스트용 라우팅
@@ -12,6 +13,12 @@ export default function App() {
   }, []);
   // 작업 테스트용 라우팅
 
-  return <FontText>Index</FontText>;
+  return  (
+    <View>
+      <Link href="/pages/Account/Account">Account</Link>
+      <FontText>Index</FontText>;
+      </View>
+    );
+
 }
 
