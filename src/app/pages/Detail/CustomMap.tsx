@@ -14,7 +14,7 @@ export default function CustomMap() {
   const onLoaded = async () => {
     // webview의 Initmap 함수 실행
     if (webViewRef.current) {
-      webViewRef.current.injectJavaScript(`window.initMap()`);
+      webViewRef.current.injectJavaScript(`window.makeCustomMap()`);
     }
   };
 
@@ -23,7 +23,7 @@ export default function CustomMap() {
       ref={webViewRef}
       originWhitelist={['*']}
       javaScriptEnabled={true}
-      source={require('./customMap.html')}
+      source={require('@/../map/customMap.html')}
       onMessage={(message) => {
         const { nativeEvent } = message;
         console.log('customMap script :', nativeEvent.data);
