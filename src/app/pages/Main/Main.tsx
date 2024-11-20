@@ -32,6 +32,7 @@ export default function Main() {
                 <Entypo name="chevron-down" size={20} color="#1B1D1F" />    
             </View>
             <ImageSlider/>
+            <Hr />
       </ScrollView>
     </SafeAreaView>
     
