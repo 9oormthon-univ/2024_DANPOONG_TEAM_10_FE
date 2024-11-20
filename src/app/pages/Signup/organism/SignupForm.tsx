@@ -1,3 +1,4 @@
+//이름 입력창
 import FontText from "@/components/theme/FontText";
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Image } from 'react-native';

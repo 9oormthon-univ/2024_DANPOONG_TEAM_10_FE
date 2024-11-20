@@ -1,3 +1,4 @@
+//생년월일 선택 드롭다운
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import DropdownPicker from "react-native-dropdown-picker";
