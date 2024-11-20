@@ -26,7 +26,7 @@ export default function Map() {
     // webview의 Initmap 함수 실행
     if (webViewRef.current) {
       webViewRef.current.injectJavaScript(
-        `window.initMap(${latitude}, ${longitude})`
+        `window.makeMap(${latitude}, ${longitude})`
       );
     }
   };
@@ -37,7 +37,7 @@ export default function Map() {
         ref={webViewRef}
         originWhitelist={['*']}
         javaScriptEnabled={true}
-        source={require('./kakaomap.html')}
+        source={require('@/../map/kakaomap.html')}
         onMessage={(message) => {
           const { nativeEvent } = message;
           console.log('map script :', nativeEvent.data);
