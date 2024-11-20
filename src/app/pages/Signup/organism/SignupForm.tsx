@@ -1,58 +1,57 @@
-//이름 입력창
+//닉네임 폼
+import React, { useState } from "react";
+import { View, TextInput, Image } from "react-native";
 import FontText from "@/components/theme/FontText";
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, Image } from 'react-native';
 
 const SignupForm: React.FC = () => {
-  const [name, setName] = useState<string>('');;
+  const [name, setName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleNameChange = (text: string) => {
+    setName(text);
+    if (text.length < 2 || text.length > 10) {
+      setError("닉네임은 2~10글자 사이로 입력해주세요.");
+    } else {
+      setError(null);
+    }
+  };
 
   return (
-    <View style={styles.container}>
-      <FontText style={styles.font}>이름</FontText>
+    <View className="w-full justify-center">
+      <FontText style={{ fontSize: 16, fontWeight:"bold"}}>이름</FontText>
       <TextInput
-        style={styles.input}
+        className={`h-11 border rounded-lg mt-3 px-3 text-xs ${
+          error ? "border-[#FB8401]" : "border-[#E9EBED]"
+        }`}
         placeholder="닉네임을 입력하세요"
         value={name}
-        onChangeText={setName}
+        onChangeText={handleNameChange}
         placeholderTextColor="#9FA4A9"
       />
-      <View style={{ flexDirection: "row", alignItems:"center"}}>
-  <Image
-    source={require('@/assets/check-icon.png')}
-    style={{ marginRight: 4 }}
-  />
-  <FontText style={{ color: "#053C57" , fontsize:12}}>사용 가능한 닉네임 입니다.</FontText>
-</View>
-<View style={{ flexDirection: "row", alignItems:"center"}}>
-  <Image
-    source={require('@/assets/warning-icon.png')}
-    style={{ marginRight: 4}}
-  />
-  <FontText style={{ color: "#053C57" , fontsize:12}}>사용 불가능한 닉네임 입니다.</FontText>
-</View>
+
+      {error ? (
+        <View className="flex-row items-center mt-1">
+          <Image
+            source={require('@/assets/warning-icon.png')}
+            className="mr-1"
+          />
+          <FontText color="#053C57"  style={{ fontSize: 12}}>{error}</FontText>
+        </View>
+      ) : (
+        name && (
+          <View className="flex-row items-center mt-1">
+            <Image
+              source={require('@/assets/check-icon.png')}
+              className="mr-1"
+            />
+            <FontText color="#053C57"  style={{ fontSize: 12}}>
+              사용 가능한 닉네임 입니다.
+            </FontText>
+          </View>
+        )
+      )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width:"100%",
-    justifyContent: 'center',
-  },
-  input: {
-    height: 36,
-    borderColor: '#E9EBED',
-    borderWidth: 1,
-    marginTop: 12,
-    marginBottom: 7,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    fontSize: 12,
-  },
-    font: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
 
 export default SignupForm;
