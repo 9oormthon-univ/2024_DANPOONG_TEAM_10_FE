@@ -38,7 +38,7 @@ export default function ImageSlider() {
         {images.map((image, index) => (
           <View key={index} className="justify-center items-center p-3" style={{ width: width, height: width }}>
             <Image source={image} className="w-full border-2 h-full rounded-lg" resizeMode="contain" />
-            <FontText>Page {index + 1}</FontText>
+            <FontText>{index + 1}</FontText>
           </View>
         ))}
       </ScrollView>

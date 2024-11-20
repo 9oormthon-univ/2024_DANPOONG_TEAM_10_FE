@@ -35,7 +35,7 @@ export default function SignupForm() {
             source={require('@/assets/warning-icon.png')}
             className="mr-1"
           />
-          <FontText color="#053C57"  style={{ fontSize: 12}}>{error}</FontText>
+          <FontText className="text-[#053C57]"  style={{ fontSize: 12}}>{error}</FontText>
         </View>
       ) : (
         name && (
@@ -44,7 +44,7 @@ export default function SignupForm() {
               source={require('@/assets/check-icon.png')}
               className="mr-1"
             />
-            <FontText color="#053C57"  style={{ fontSize: 12}}>
+            <FontText className="text-[#053C57]"  style={{ fontSize: 12}}>
               사용 가능한 닉네임 입니다.
             </FontText>
           </View>

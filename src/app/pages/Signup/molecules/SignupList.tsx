@@ -1,6 +1,6 @@
 ////본인인증, 이용 약관 리스트
 import React, { useState } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import FontText from "@/components/theme/FontText";
 import Entypo from '@expo/vector-icons/Entypo';
 
@@ -25,7 +25,7 @@ export default function SignupList({
     <View className="mb-10 w-full justify-center px-6">
       {/* 제목과 아이콘 */}
       <View className="flex-row items-end">
-        <FontText color="#000" style={{ fontSize: 16, fontWeight: "bold" }}>
+        <FontText style={{ fontSize: 16, fontWeight: "bold" }}>
           {title}
         </FontText>
         <Entypo name="chevron-right" size={16} color="black" />
@@ -33,7 +33,7 @@ export default function SignupList({
 
       {/* 설명 */}
       {description && (
-        <FontText color="#9FA4A9" style={{ fontSize: 12 }}>
+        <FontText className="text-[#9FA4A9]" style={{ fontSize: 12 }}>
           {description}
         </FontText>
       )}
@@ -45,7 +45,7 @@ export default function SignupList({
             className="flex-row items-center mr-5"
             onPress={() => handleSelect("동의합니다")}
           >
-            <FontText color="#000" style={{ fontSize: 12 }}>
+            <FontText style={{ fontSize: 12 }}>
               동의합니다.
             </FontText>
             <View
@@ -59,7 +59,7 @@ export default function SignupList({
             className="flex-row items-center"
             onPress={() => handleSelect("동의하지 않습니다")}
           >
-            <FontText color="#000" style={{ fontSize: 12 }}>
+            <FontText style={{ fontSize: 12 }}>
               동의하지 않습니다.
             </FontText>
             <View

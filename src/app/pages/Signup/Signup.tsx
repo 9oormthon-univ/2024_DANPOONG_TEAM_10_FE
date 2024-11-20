@@ -48,7 +48,7 @@ export default function Signup() {
         className="w-3/5 bg-[#053C57] rounded-full py-2 items-center mt-4 mb-3"
         onPress={() => router.push('pages/Main/Main')}
       >
-        <FontText color="#FFFFFF">완료</FontText>
+        <FontText className="text-white">완료</FontText>
       </TouchableOpacity>
     </SafeAreaView>
   );

@@ -38,7 +38,7 @@ export default function BirthdatePicker() {
 
   return (
     <View className="w-full justify-center">
-      <FontText color="#000"  style={{ fontSize: 16 ,fontWeight: "bold" }}  >생년월일</FontText>
+      <FontText style={{ fontSize: 16 ,fontWeight: "bold" }}>생년월일</FontText>
 
       <View style={styles.row}>
         {/* 연도 선택 */}
