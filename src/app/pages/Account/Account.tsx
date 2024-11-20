@@ -4,12 +4,7 @@ import { router } from 'expo-router';
 
 export default function Account() {
   return (
-    <View  style={{
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      gap:200,
-    }}>
+    <View  className="flex-1 justify-center items-center gap-48">
       {/* logo */}
       <Image source={require('@/assets/logo.png')} />
       

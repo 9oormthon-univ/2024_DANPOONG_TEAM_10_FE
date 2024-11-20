@@ -1,6 +1,6 @@
-//본인인증, 약관 리스트
+//본인인증, 이용 약관
 import React, { useState } from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import FontText from "@/components/theme/FontText";
 
 interface SignupListProps {
@@ -23,44 +23,42 @@ const SignupList: React.FC<SignupListProps> = ({
   };
 
   return (
-    <View style={[styles.container]}>
+    <View className="mb-10 w-full justify-center px-6">
       {/* 제목과 아이콘 */}
-      <View style={styles.row}>
-        <FontText style={[styles.title]}>{title}</FontText>
-        <Image source={iconSource} style={styles.icon} />
+      <View className="flex-row items-baseline">
+        <FontText color="#000"  style={{ fontSize: 16 ,fontWeight: "bold" }}>{title}</FontText>
+        <Image source={iconSource} className="ml-2" />
       </View>
 
       {/* 설명 */}
       {description && (
-        <FontText style={[styles.description]}>{description}</FontText>
+        <FontText color="#9FA4A9"  style={{ fontSize: 12 }}>{description}</FontText>
       )}
 
-      {/* 라디오 버튼*/}
+      {/* 라디오 버튼 */}
       {showRadioButtons && (
-          <View style={styles.radioGroup}>
+        <View className="flex-row mt-2 justify-end">
           <TouchableOpacity
-            style={styles.radioOption}
+            className="flex-row items-center mr-5"
             onPress={() => handleSelect("동의합니다")}
           >
-            <Text style={styles.radioText}>동의합니다.</Text>
+            <FontText color="#000"  style={{ fontSize: 12}}>동의합니다.</FontText>
             <View
-              style={[
-                styles.radioCircle,
-                selectedOption === "동의합니다" && styles.radioSelected,
-              ]}
+              className={`w-4 h-4 rounded-full border border-[#053C57] ml-3 ${
+                selectedOption === "동의합니다" ? "bg-[#053C57]" : ""
+              }`}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.radioOption}
+            className="flex-row items-center"
             onPress={() => handleSelect("동의하지 않습니다")}
           >
-            <Text style={styles.radioText}>동의하지 않습니다.</Text>
+            <FontText color="#000"  style={{ fontSize: 12}}>동의하지 않습니다.</FontText>
             <View
-              style={[
-                styles.radioCircle,
-                selectedOption === "동의하지 않습니다" && styles.radioSelected,
-              ]}
+              className={`w-4 h-4 rounded-full border border-[#053C57] ml-3 ${
+                selectedOption === "동의하지 않습니다" ? "bg-[#053C57]" : ""
+              }`}
             />
           </TouchableOpacity>
         </View>
@@ -68,54 +66,5 @@ const SignupList: React.FC<SignupListProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 40,
-    width: "100%",
-    justifyContent: "center",
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "baseline",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  description: {
-    color: "#9FA4A9",
-    fontSize: 12,
-    marginTop: 4,
-  },
-  icon: {
-    marginLeft: 8,
-  },
-  radioGroup: {
-    flexDirection: "row",
-    marginTop: 10,
-    justifyContent:"flex-end",
-  },
-  radioOption: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: 20,
-  },
-  radioCircle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#053C57",
-    marginLeft: 12,
-  },
-  radioSelected: {
-    backgroundColor: "#053C57", // 선택된 라디오 버튼 색상
-  },
-  radioText: {
-    fontSize: 12,
-    color: "#000",
-  },
-});
 
 export default SignupList;

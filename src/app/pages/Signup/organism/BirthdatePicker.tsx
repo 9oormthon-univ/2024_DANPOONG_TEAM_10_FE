@@ -37,8 +37,8 @@ const BirthdatePicker: React.FC = () => {
   const [dayOpen, setDayOpen] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <FontText style={styles.font}>생년월일</FontText>
+    <View className="w-full justify-center">
+      <FontText color="#000"  style={{ fontSize: 16 ,fontWeight: "bold" }}  >생년월일</FontText>
 
       <View style={styles.row}>
         {/* 연도 선택 */}
@@ -49,9 +49,14 @@ const BirthdatePicker: React.FC = () => {
           setOpen={setYearOpen}
           setValue={setYear}
           placeholder="연도"
-          style={pickerStyles.container}
-          placeholderStyle={pickerStyles.placeholderStyle}
-          selectedItemLabelStyle={pickerStyles.selectedItemStyle}
+          style={{
+            backgroundColor: "#F2F2F2",
+            borderColor: "#E9EBED",
+            borderWidth: 1,
+            borderRadius: 10,
+          }}
+          placeholderStyle={{ fontSize: 12, color: "#9FA4A9" }}
+          selectedItemLabelStyle={{ fontSize: 12, color: "black" }}
         />
 
         {/* 월 선택 */}
@@ -62,9 +67,14 @@ const BirthdatePicker: React.FC = () => {
           setOpen={setMonthOpen}
           setValue={setMonth}
           placeholder="월"
-          style={pickerStyles.container}
-          placeholderStyle={pickerStyles.placeholderStyle}
-          selectedItemLabelStyle={pickerStyles.selectedItemStyle}
+          style={{
+            backgroundColor: "#F2F2F2",
+            borderColor: "#E9EBED",
+            borderWidth: 1,
+            borderRadius: 10,
+          }}
+          placeholderStyle={{ fontSize: 12, color: "#9FA4A9" }}
+          selectedItemLabelStyle={{ fontSize: 12, color: "black" }}
         />
 
         {/* 일 선택 */}
@@ -75,9 +85,14 @@ const BirthdatePicker: React.FC = () => {
           setOpen={setDayOpen}
           setValue={setDay}
           placeholder="일"
-          style={pickerStyles.container}
-          placeholderStyle={pickerStyles.placeholderStyle}
-          selectedItemLabelStyle={pickerStyles.selectedItemStyle}
+          style={{
+            backgroundColor: "#F2F2F2",
+            borderColor: "#E9EBED",
+            borderWidth: 1,
+            borderRadius: 10,
+          }}
+          placeholderStyle={{ fontSize: 12, color: "#9FA4A9" }}
+          selectedItemLabelStyle={{ fontSize: 12, color: "black" }}
         />
       </View>
     </View>
@@ -85,38 +100,11 @@ const BirthdatePicker: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width:'100%',
-    justifyContent: "center",
-  },
-  font: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom:12,
-  },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "30%",
-    marginBottom:12,
-  },
-});
-
-const pickerStyles = StyleSheet.create({
-  container: {
-    backgroundColor:"#F2F2F2",
-    borderColor: "#E9EBED",
-    borderWidth: 1,
-    borderRadius: 10,
-  },
-  
-  placeholderStyle: {
-    fontSize: 12,
-    color: "#9FA4A9",
-  },
-  selectedItemStyle: {
-    fontSize: 12,
-    color: "black",
+    marginTop:12,
   },
 });
 
