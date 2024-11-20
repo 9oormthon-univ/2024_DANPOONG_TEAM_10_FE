@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View, TextInput, Image } from "react-native";
 import FontText from "@/components/theme/FontText";
 
-const SignupForm: React.FC = () => {
+export default function SignupForm() {
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
@@ -52,6 +52,4 @@ const SignupForm: React.FC = () => {
       )}
     </View>
   );
-};
-
-export default SignupForm;
+}

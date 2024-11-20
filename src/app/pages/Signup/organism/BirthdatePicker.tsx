@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import DropdownPicker from "react-native-dropdown-picker";
 import FontText from "@/components/theme/FontText";
 
-const BirthdatePicker: React.FC = () => {
+export default function BirthdatePicker() {
   const [year, setYear] = useState<string | null>(null);
   const [month, setMonth] = useState<string | null>(null);
   const [day, setDay] = useState<string | null>(null);
@@ -97,7 +97,7 @@ const BirthdatePicker: React.FC = () => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   row: {
@@ -108,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BirthdatePicker;
+
