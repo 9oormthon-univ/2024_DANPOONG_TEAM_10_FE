@@ -1,9 +1,10 @@
 import MapIcon from '@/components/MapIcon';
 import FontText from '@/components/theme/FontText';
-import { Image, SafeAreaView, ScrollView, View } from 'react-native';
+import { Image, SafeAreaView, ScrollView, TouchableOpacity, View } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import Hr from '@/components/Hr';
 import ImageSlider from './organism/ImageSlider';
+import { router } from 'expo-router';
 
 export default function Main() {
 
@@ -21,7 +22,10 @@ export default function Main() {
                 <Entypo name="chevron-down" size={16} color="#1B1D1F" />    
             </View>
             <ScrollView className='px-5 mt-7 mb-7' horizontal={true} >
+                <TouchableOpacity
+                onPress={()=>router.push('pages/Main/MainCity')}>
                 <Image source={require('@/assets/city.png')} />
+                </TouchableOpacity>
             </ScrollView>
             <Hr />
             {/* 내용 */}
