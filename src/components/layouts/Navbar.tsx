@@ -2,6 +2,7 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import FontText from '../theme/FontText';
 import { useRouter } from 'expo-router';
 
+// 바닥 네비바
 export default function Navbar() {
   const router = useRouter();
 
