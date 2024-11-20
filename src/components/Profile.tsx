@@ -6,6 +6,7 @@ interface ProfileProps {
   nickname: string;
 }
 
+// 유저 프로필 이미지, 닉네임 묶음
 export default function Profile({ image, nickname }: ProfileProps) {
   return (
     <View className="flex-row gap-3 items-center">

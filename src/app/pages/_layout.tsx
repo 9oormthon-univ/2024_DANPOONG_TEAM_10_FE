@@ -6,7 +6,7 @@ import { Platform, View } from 'react-native';
 
 export default function PagesLayout() {
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-white">
       {/* 아이폰 마진 */}
       {Platform.OS === 'ios' ? <View className="mt-20"></View> : null}
 

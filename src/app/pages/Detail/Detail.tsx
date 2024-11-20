@@ -8,6 +8,7 @@ import CustomMap from './CustomMap';
 import { useRouter } from 'expo-router';
 import Profile from '@/components/Profile';
 import Header from '@/components/layouts/Header';
+import Title from '@/components/theme/TitleText';
 
 type ReviewType = {
   profile: string;
@@ -45,7 +46,7 @@ export default function Detail() {
         profile: 'asdojf',
         nickname: 'user',
         stars: 5,
-        content: '재미있었습니다.',
+        content: '재미있었습니다.재미있었습니다.재미있었습니다.',
       },
       {
         profile: 'asdojf',
@@ -75,40 +76,60 @@ export default function Detail() {
 
   return (
     <View className="flex-1">
-      <Header left={<FontText>{'< Header'}</FontText>} />
+      <Header
+        left={<Title>{'< 축제 이름'}</Title>}
+        right={
+          <View className="flex-row gap-3">
+            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+          </View>
+        }
+      />
       <ScrollView>
         <View className="flex-1 p-5 min-h-72">
-          <FontText>축제 지도</FontText>
           <Map />
         </View>
         <Hr />
-        <View className="flex-1 p-5 min-h-32">
-          <TouchableOpacity className="py-4" onPress={goReview}>
-            <FontText>방문자 리뷰</FontText>
+        <View className="flex-1 py-5 min-h-32 gap-4">
+          <TouchableOpacity className="px-5" onPress={goReview}>
+            <Title>{'방문자 리뷰 >'}</Title>
           </TouchableOpacity>
           <View className="flex-1">
-            <ScrollView horizontal contentContainerStyle={{ gap: 20 }}>
+            <ScrollView
+              horizontal
+              contentContainerStyle={{
+                gap: 20,
+                paddingVertical: 10,
+                paddingHorizontal: 20,
+              }}
+            >
               {reviewList.length !== 0 &&
                 reviewList.map((review, i) => (
-                  <View className="border-2 rounded-xl p-3 gap-2" key={i}>
+                  // 리뷰 카드
+                  <View
+                    className="w-[155] h-[100] shadow bg-white rounded-xl p-3 gap-2"
+                    key={i}
+                  >
                     <Profile
                       image={review.profile}
                       nickname={review.nickname}
                     />
                     <Stars count={review.stars} />
-                    <FontText>{`"${review.content}"`}</FontText>
+                    <FontText
+                      numberOfLines={1}
+                    >{`"${review.content}"`}</FontText>
                   </View>
                 ))}
             </ScrollView>
           </View>
         </View>
         <Hr />
-        <View className="flex-1 p-5 min-h-72">
-          <FontText>공연 타임테이블</FontText>
+        <View className="flex-1 p-5 min-h-72 gap-4">
+          <Title>타임테이블</Title>
         </View>
         <Hr />
-        <View className="flex-1 p-5 min-h-72">
-          <FontText>커스텀 지도?</FontText>
+        <View className="flex-1 p-5 min-h-72 gap-4">
+          <Title>행사 안내</Title>
           <CustomMap />
         </View>
       </ScrollView>

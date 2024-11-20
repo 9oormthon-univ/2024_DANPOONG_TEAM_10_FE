@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
 import * as Location from 'expo-location';
 
@@ -19,18 +19,20 @@ export default function CustomMap() {
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      originWhitelist={['*']}
-      javaScriptEnabled={true}
-      source={require('@/../map/customMap.html')}
-      onMessage={(message) => {
-        const { nativeEvent } = message;
-        console.log('customMap script :', nativeEvent.data);
-        if (nativeEvent.data === 'loaded') {
-          onLoaded();
-        }
-      }}
-    />
+    <View className="flex-1 rounded-xl overflow-hidden ">
+      <WebView
+        ref={webViewRef}
+        originWhitelist={['*']}
+        javaScriptEnabled={true}
+        source={require('@/../map/customMap.html')}
+        onMessage={(message) => {
+          const { nativeEvent } = message;
+          console.log('customMap script :', nativeEvent.data);
+          if (nativeEvent.data === 'loaded') {
+            onLoaded();
+          }
+        }}
+      />
+    </View>
   );
 }
