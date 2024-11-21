@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { View, TextInput, Image } from "react-native";
 import FontText from "@/components/theme/FontText";
 
-const SignupForm: React.FC = () => {
+export default function SignupForm() {
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +35,7 @@ const SignupForm: React.FC = () => {
             source={require('@/assets/warning-icon.png')}
             className="mr-1"
           />
-          <FontText color="#053C57"  style={{ fontSize: 12}}>{error}</FontText>
+          <FontText className="text-[#053C57]"  style={{ fontSize: 12}}>{error}</FontText>
         </View>
       ) : (
         name && (
@@ -44,7 +44,7 @@ const SignupForm: React.FC = () => {
               source={require('@/assets/check-icon.png')}
               className="mr-1"
             />
-            <FontText color="#053C57"  style={{ fontSize: 12}}>
+            <FontText className="text-[#053C57]"  style={{ fontSize: 12}}>
               사용 가능한 닉네임 입니다.
             </FontText>
           </View>
@@ -52,6 +52,4 @@ const SignupForm: React.FC = () => {
       )}
     </View>
   );
-};
-
-export default SignupForm;
+}
