@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import WebView from 'react-native-webview';
 import * as Location from 'expo-location';
 
@@ -14,23 +14,25 @@ export default function CustomMap() {
   const onLoaded = async () => {
     // webview의 Initmap 함수 실행
     if (webViewRef.current) {
-      webViewRef.current.injectJavaScript(`window.initMap()`);
+      webViewRef.current.injectJavaScript(`window.makeCustomMap()`);
     }
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      originWhitelist={['*']}
-      javaScriptEnabled={true}
-      source={require('./customMap.html')}
-      onMessage={(message) => {
-        const { nativeEvent } = message;
-        console.log('customMap script :', nativeEvent.data);
-        if (nativeEvent.data === 'loaded') {
-          onLoaded();
-        }
-      }}
-    />
+    <View className="flex-1">
+      <WebView
+        ref={webViewRef}
+        originWhitelist={['*']}
+        javaScriptEnabled={true}
+        source={require('@/../map/customMap.html')}
+        onMessage={(message) => {
+          const { nativeEvent } = message;
+          console.log('customMap script :', nativeEvent.data);
+          if (nativeEvent.data === 'loaded') {
+            onLoaded();
+          }
+        }}
+      />
+    </View>
   );
 }

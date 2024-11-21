@@ -2,6 +2,7 @@ import Header from '@/components/layouts/Header';
 import Profile from '@/components/Profile';
 import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
+import Title from '@/components/theme/TitleText';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
@@ -43,7 +44,8 @@ export default function Review() {
         profile: 'image',
         nickname: '닉네임',
         stars: 3,
-        content: '리뷰글 리뷰글',
+        content:
+          '리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글 리뷰글',
         contentImage: 'image',
         likes: 333,
         isLiked: true,
@@ -71,30 +73,46 @@ export default function Review() {
     fetchData();
   }, []);
 
+  // 뒤로가기
+  const goBack = () => {
+    router.back();
+  };
+
+  // 리뷰 작성으로 이동
   const goWriteReview = () => {
     router.push('pages/Review/WriteReview');
   };
 
   return (
     <View className="flex-1">
-      <Header left={<FontText>{'< Header'}</FontText>} />
+      <Header
+        left={
+          <TouchableOpacity onPress={goBack}>
+            <Title>{'< 방문자 리뷰'}</Title>
+          </TouchableOpacity>
+        }
+      />
       <View className="flex-1">
         <ScrollView>
-          <View className="m-7 h-32 border-2 items-center justify-center gap-3">
-            <FontText>이 축제에 방문하셨나요?</FontText>
+          <View className="m-7 h-32 shadow bg-white rounded-xl items-center justify-center gap-3">
+            <Title>이 축제에 방문하셨나요?</Title>
             <TouchableOpacity
               onPress={goWriteReview}
               className="bg-cyan-950 py-2 px-5 rounded-full"
             >
-              <FontText style={{ color: 'white' }}>리뷰 작성하기</FontText>
+              <FontText className="text-white">리뷰 작성하기</FontText>
             </TouchableOpacity>
           </View>
           {reviewList.length !== 0 &&
             reviewList.map((review, i) => (
-              <View key={i} className="mx-7 mb-7 border-2 p-3 gap-3">
+              // 리뷰 카드
+              <View
+                key={i}
+                className="shadow bg-white rounded-xl mx-7 mb-7 p-3 gap-3"
+              >
                 <Profile image={review.profile} nickname={review.nickname} />
                 {review.contentImage ? (
-                  <View className="min-h-60 bg-gray-300">
+                  <View className="min-h-60 bg-gray-300 rounded-xl">
                     <Image />
                   </View>
                 ) : null}
