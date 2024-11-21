@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from 'react';
-import { Text, View, Animated, TouchableOpacity, Easing } from 'react-native';
+import { Animated, TouchableOpacity, Easing } from 'react-native';
 
 interface ToggleButtonProps {
   isOn: boolean;
   onToggle: (value: boolean) => void;
 }
 
-export default function ToggleButton ({ isOn, onToggle }:ToggleButtonProps) {
+export default function ToggleButton({ isOn, onToggle }: ToggleButtonProps) {
   const positionButton = useRef(new Animated.Value(isOn ? 1 : 0)).current;
 
   useEffect(() => {
@@ -20,17 +20,17 @@ export default function ToggleButton ({ isOn, onToggle }:ToggleButtonProps) {
 
   const positionInterPol = positionButton.interpolate({
     inputRange: [0, 1],
-    outputRange: [3, 27], // Position for the button's circle
+    outputRange: [3, 27],
   });
 
   const backgroundColorAnim = positionButton.interpolate({
     inputRange: [0, 1],
-    outputRange: ['#E9EBED', '#053C57'], // Background color of the toggle
+    outputRange: ['#E9EBED', '#053C57'],
   });
 
   const buttonColorAnim = positionButton.interpolate({
     inputRange: [0, 1],
-    outputRange: ['#053C57', '#FFF'], // Color of the button circle (moving part)
+    outputRange: ['#053C57', '#FFF'],
   });
 
   const initialOpacityOn = positionButton.interpolate({
@@ -49,49 +49,32 @@ export default function ToggleButton ({ isOn, onToggle }:ToggleButtonProps) {
 
   return (
     <TouchableOpacity
-      style={{ height: 30, width: 60 }}
-      activeOpacity={0.9}
       onPress={onPress}
+      activeOpacity={0.9}
+      className="h-[30px] w-[60px]"
     >
       <Animated.View
-        style={[
-          { height: 30, width: 60, borderRadius: 30 },
-          { backgroundColor: backgroundColorAnim },
-        ]}
-        className="relative"
+        style={{ backgroundColor: backgroundColorAnim }}
+        className="h-[30px] w-[60px] rounded-full relative"
       >
         <Animated.Text
-          style={[
-            { position: 'absolute', top: 6, left: 5, fontSize: 14 },
-            { color: '#fff' },
-            { opacity: initialOpacityOn },
-          ]}
+          style={{ opacity: initialOpacityOn }}
+          className="absolute top-[6px] left-[5px] text-sm text-white"
         >
           ON
         </Animated.Text>
         <Animated.Text
-          style={[
-            { position: 'absolute', top: 6, right: 5, fontSize: 14 },
-            { color: '#053C57' },
-            { opacity: initialOpacityOff },
-          ]}
+          style={{ opacity: initialOpacityOff }}
+          className="absolute top-[6px] right-[5px] text-sm text-[#053C57]"
         >
           OFF
         </Animated.Text>
         <Animated.View
-          style={[
-            {
-              height: 15,
-              width: 15,
-              borderRadius: 20,
-              margin:8,
-              
-            },
-            {
-              backgroundColor: buttonColorAnim,
-              transform: [{ translateX: positionInterPol }],
-            },
-          ]}
+          style={{
+            backgroundColor: buttonColorAnim,
+            transform: [{ translateX: positionInterPol }],
+          }}
+          className="h-[15px] w-[15px] rounded-full m-[8px]"
         />
       </Animated.View>
     </TouchableOpacity>
