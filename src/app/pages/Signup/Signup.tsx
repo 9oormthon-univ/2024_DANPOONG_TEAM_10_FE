@@ -1,60 +1,74 @@
-//회원가입 페이지
 import FontText from "@/components/theme/FontText";
-import React from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, TouchableOpacity } from "react-native";
 import SignupForm from "./organism/SignupForm";
 import BirthdatePicker from "./organism/BirthdatePicker";
-import SignupList from "./molecules/SignupList";
 import Header from "@/components/layouts/Header";
+import GenderButton from "./molecules/GenderButton";
 
-const Signup: React.FC = () => {
+export default function Signup() {
+  const [name, setName] = useState<string>("");
+  const [selectedGender, setSelectedGender] = useState<string | null>(null);
+  const [birthdate, setBirthdate] = useState<{ year: string | null; month: string | null; day: string | null }>({
+    year: null,
+    month: null,
+    day: null,
+  });
+
+  const handleNameChange = (newName: string) => {
+    setName(newName);
+  };
+
+  const handleSelectGender = (gender: string | null) => {
+    setSelectedGender(gender);
+  };
+
+  const handleDateChange = useCallback((date: { year: string | null; month: string | null; day: string | null }) => {
+    setBirthdate(date);
+  }, []);
+  
+
+  const handleSubmit = () => {
+    console.log("닉네임:", name); 
+    console.log("성별:", selectedGender);
+    console.log("생년월일:", birthdate);
+  };
+
+  const isFormValid =
+    name.trim() !== "" &&
+    selectedGender !== null &&
+    birthdate.year !== null &&
+    birthdate.month !== null &&
+    birthdate.day !== null;
+
   return (
     <View className="flex-1 items-center w-full">
       <View className="w-full">
-      <Header left={<FontText>{'< 회원가입'}</FontText>} />
+        <Header left={<FontText>{'< 회원가입'}</FontText>} />
       </View>
       {/* 입력폼 */}
       <View className="mt-11 mb-10 px-6">
-        <SignupForm />
+        <SignupForm name={name} onNameChange={handleNameChange} />
       </View>
 
       {/* 생년월일 */}
       <View className="mb-10 px-6">
-        <BirthdatePicker />
+        <BirthdatePicker onDateChange={handleDateChange} />
       </View>
 
-      {/* 본인인증 */}
-      <SignupList
-        title="본인인증"
-        iconSource={require("@/assets/vector-icon.png")}
-      />
-      <SignupList
-        title="서비스 이용 약관"
-        iconSource={require("@/assets/vector-icon.png")}
-        description="동의를 거절하는 경우 서비스 이용이 제한 될 수 있습니다."
-        showRadioButtons
-      />
-      <SignupList
-        title="개인 정보 활용 동의"
-        iconSource={require("@/assets/vector-icon.png")}
-        description="동의를 거절하는 경우 서비스 이용이 제한 될 수 있습니다."
-        showRadioButtons
-      />
-      <SignupList
-        title="마켓팅 수신 동의"
-        iconSource={require("@/assets/vector-icon.png")}
-        description="동의를 거절하는 경우 서비스 이용이 제한 될 수 있습니다."
-        showRadioButtons
-      />
+      {/* 성별 버튼 */}
+      <GenderButton onSelectGender={handleSelectGender} />
 
+      {/* 완료 버튼 */}
       <TouchableOpacity
-        className="w-3/5 bg-[#053C57] rounded-full py-2 items-center mt-4 mb-3"
-        onPress={() => console.log("submit")}
+        className={`w-2/5 rounded-full py-2 items-center mt-40 mb-3 ${
+          isFormValid ? "bg-[#053C57]" : "border-[1px] border-[#053C57] bg-[#F7F8F9]"
+        }`}
+        onPress={handleSubmit}
+        disabled={!isFormValid}
       >
-        <FontText color="#FFFFFF">완료</FontText>
+        <FontText className={`font-extrabold text-[16px] ${isFormValid? "text-white" : "text-[#053C57]"}`}>완료</FontText>
       </TouchableOpacity>
     </View>
   );
-};
-
-export default Signup;
+}
