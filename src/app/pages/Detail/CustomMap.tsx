@@ -19,7 +19,7 @@ export default function CustomMap() {
   };
 
   return (
-    <View className="flex-1 rounded-xl overflow-hidden ">
+    <View className="flex-1">
       <WebView
         ref={webViewRef}
         originWhitelist={['*']}
