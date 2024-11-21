@@ -1,6 +1,6 @@
 import FontText from "@/components/theme/FontText";
 import React, { useState, useCallback } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { SafeAreaView,View, TouchableOpacity } from "react-native";
 import SignupForm from "./organism/SignupForm";
 import BirthdatePicker from "./organism/BirthdatePicker";
 import Header from "@/components/layouts/Header";
@@ -42,7 +42,7 @@ export default function Signup() {
     birthdate.day !== null;
 
   return (
-    <View className="flex-1 items-center w-full">
+    <SafeAreaView className="flex-1 items-center w-full">
       <View className="w-full">
         <Header left={<FontText>{'< 회원가입'}</FontText>} />
       </View>
@@ -68,7 +68,8 @@ export default function Signup() {
         disabled={!isFormValid}
       >
         <FontText className={`font-extrabold text-[16px] ${isFormValid? "text-white" : "text-[#053C57]"}`}>완료</FontText>
+
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }

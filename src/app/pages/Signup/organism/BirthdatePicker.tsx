@@ -47,7 +47,6 @@ export default function BirthdatePicker({ onDateChange }: BirthdatePickerProps) 
   return (
     <View className="w-full justify-center">
       <FontText style={{ fontSize: 16, fontWeight: "bold" }}>생년월일</FontText>
-
       <View style={styles.row}>
         {/* 연도 선택 */}
         <DropdownPicker

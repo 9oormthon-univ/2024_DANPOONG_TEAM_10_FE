@@ -5,8 +5,12 @@ import { useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'expo-image';
+import Title from '@/components/theme/TitleText';
+import { useRouter } from 'expo-router';
 
 export default function WriteReview() {
+  const router = useRouter();
+
   // 사용자 입력 이미지
   const [image, setImage] = useState<string | null>(null);
   // 사용자 선택 별점
@@ -29,12 +33,23 @@ export default function WriteReview() {
     }
   };
 
+  // 뒤로 가기
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <View className="flex-1">
-      <Header left={<FontText>{'< 리뷰 작성하기'}</FontText>} />
-      <View className="flex-1 m-7 gap-5">
+      <Header
+        left={
+          <TouchableOpacity onPress={goBack}>
+            <Title>{'< 리뷰 작성하기'}</Title>
+          </TouchableOpacity>
+        }
+      />
+      <View className="flex-1 m-7 p-7 gap-5 shadow bg-white rounded-xl">
         <Profile image="imgURL" nickname="닉네임" />
-        <View className="flex-[5] bg-gray-200 items-center justify-center">
+        <View className="flex-[5] bg-gray-200 rounded-xl items-center justify-center">
           {image ? (
             <Image
               source={{ uri: image }}
@@ -45,7 +60,7 @@ export default function WriteReview() {
               onPress={pickImage}
               className="h-10 w-10 bg-cyan-900 items-center justify-center rounded-full"
             >
-              <FontText style={{ color: 'white' }}>+</FontText>
+              <FontText className="text-white">+</FontText>
             </TouchableOpacity>
           )}
         </View>
@@ -71,8 +86,9 @@ export default function WriteReview() {
         <TextInput
           onChangeText={setContent}
           multiline
+          maxLength={200}
           textAlignVertical="top"
-          className="flex-[3] border-2 p-2"
+          className="flex-[3] border-2 border-gray-300 rounded-xl p-2"
           placeholder="다른 고객님에게 도움이 되도록 축제에 대한 솔직한 평가를 남겨주세요.(축제와 관계 없는 내용, 지나친 비난은 관리자에 의해 삭제될 수 있습니다.)"
         />
         <View className="flex-1 items-center">

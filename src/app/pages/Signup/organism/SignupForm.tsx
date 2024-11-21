@@ -40,10 +40,12 @@ export default function SignupForm({ name, onNameChange }: SignupFormProps) {
 
       {error ? (
         <View className="flex-row items-center mt-1">
+
           <Image source={require("@/assets/warning-icon.png")} className="mr-1" />
           <FontText className="text-[#053C57]" style={{ fontSize: 12 }}>
             {error}
           </FontText>
+
         </View>
       ) : (
         name && (
