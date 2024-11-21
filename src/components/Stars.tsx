@@ -8,12 +8,14 @@ export default function Stars({ count }: { count: number }) {
     else return false;
   });
   return (
-    <View className="flex-row gap-1">
+    <View className="flex-row gap-2">
       {starsList.map((star, i) => {
-        if (star)
-          return <View key={i} className="h-3 w-3 bg-black rounded-full" />;
-        else
-          return <View key={i} className="h-3 w-3 bg-gray-400 rounded-full" />;
+        return (
+          <View
+            key={i}
+            className={`h-5 w-5 rounded-full ${star ? 'bg-black' : 'bg-gray-400'}`}
+          />
+        );
       })}
     </View>
   );

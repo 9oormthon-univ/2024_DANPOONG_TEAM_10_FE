@@ -6,7 +6,6 @@ import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import Map from './Map';
 import CustomMap from './CustomMap';
 import { useRouter } from 'expo-router';
-import Profile from '@/components/Profile';
 import Header from '@/components/layouts/Header';
 import Title from '@/components/theme/TitleText';
 import Timeline from '@/components/Timeline';
@@ -160,11 +159,17 @@ export default function Detail() {
                     className="w-72 shadow bg-white rounded-xl p-3 gap-5"
                     key={i}
                   >
-                    <Profile
-                      image={review.profile}
-                      nickname={review.nickname}
-                      stars={review.stars}
-                    />
+                    {/* 프로필 */}
+                    <View className="flex-row gap-3 items-center">
+                      <View className="h-16 w-16 bg-black rounded-full" />
+                      <View className="gap-2">
+                        <FontText className="text-2xl font-bold">
+                          {review.nickname}
+                        </FontText>
+                        <Stars count={review.stars} />
+                      </View>
+                    </View>
+                    {/* 이미지, 내용 */}
                     <View className="flex-1 flex-row gap-3">
                       {review.image && (
                         <View className="h-[84] w-[84] rounded-xl bg-gray-400"></View>

@@ -1,5 +1,4 @@
 import Header from '@/components/layouts/Header';
-import Profile from '@/components/Profile';
 import FontText from '@/components/theme/FontText';
 import { useState } from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
@@ -48,7 +47,6 @@ export default function WriteReview() {
         }
       />
       <View className="flex-1 m-7 p-7 gap-5 shadow bg-white rounded-xl">
-        <Profile image="imgURL" nickname="닉네임" />
         <View className="flex-[5] bg-gray-200 rounded-xl items-center justify-center">
           {image ? (
             <Image
