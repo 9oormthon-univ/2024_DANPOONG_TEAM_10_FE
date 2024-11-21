@@ -96,4 +96,4 @@ export default function ToggleButton ({ isOn, onToggle }:ToggleButtonProps) {
       </Animated.View>
     </TouchableOpacity>
   );
-};
+}
