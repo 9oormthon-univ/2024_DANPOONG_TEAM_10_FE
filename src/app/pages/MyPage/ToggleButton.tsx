@@ -59,13 +59,13 @@ export default function ToggleButton({ isOn, onToggle }: ToggleButtonProps) {
       >
         <Animated.Text
           style={{ opacity: initialOpacityOn }}
-          className="absolute top-[6px] left-[5px] text-sm text-white"
+          className="absolute top-[6px] left-[5px] text-sm text-white font-extrabold"
         >
           ON
         </Animated.Text>
         <Animated.Text
           style={{ opacity: initialOpacityOff }}
-          className="absolute top-[6px] right-[5px] text-sm text-[#053C57]"
+          className="absolute top-[6px] right-[5px] text-sm text-[#053C57] font-extrabold"
         >
           OFF
         </Animated.Text>

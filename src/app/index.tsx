@@ -11,7 +11,7 @@ export default function App() {
       router.replace('/pages/Account/Account');
     }, 1000);
   }, []);
-  // 작업 테스트용 라우팅it
+  // 작업 테스트용 라우팅
 
 
   return (
