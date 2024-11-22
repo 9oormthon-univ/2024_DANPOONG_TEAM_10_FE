@@ -10,10 +10,10 @@ export default function Navbar() {
     router.replace('/pages/Main');
   };
   const onLikeClick = () => {
-    router.replace('/pages/Main');
+    router.replace('/pages/LikePage');
   };
   const onCalendarClick = () => {
-    router.replace('/pages/Main');
+    router.replace('/pages/CalendarPage');
   };
   const onProfileClick = () => {
     router.replace('/pages/Main');
