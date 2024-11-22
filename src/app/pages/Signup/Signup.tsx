@@ -1,43 +1,56 @@
 import FontText from "@/components/theme/FontText";
 import React, { useState, useCallback } from "react";
-import { SafeAreaView,View, TouchableOpacity } from "react-native";
+import { SafeAreaView, View, TouchableOpacity } from "react-native";
 import SignupForm from "./organism/SignupForm";
 import BirthdatePicker from "./organism/BirthdatePicker";
 import Header from "@/components/layouts/Header";
 import GenderButton from "./molecules/GenderButton";
 import { router } from "expo-router";
-import Main from "../Main/Main";
 
 export default function Signup() {
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(""); // 이름 상태
+  const [isNameValid, setIsNameValid] = useState<boolean>(false); // 이름 유효성 상태
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-  const [birthdate, setBirthdate] = useState<{ year: string | null; month: string | null; day: string | null }>({
+  const [birthdate, setBirthdate] = useState<{
+    year: string | null;
+    month: string | null;
+    day: string | null;
+  }>({
     year: null,
     month: null,
     day: null,
   });
 
+  // 이름 변경 핸들러
   const handleNameChange = (newName: string) => {
     setName(newName);
   };
 
+  // 이름 유효성 변경 핸들러
+  const handleNameValidity = (isValid: boolean) => {
+    setIsNameValid(isValid);
+  };
+
+  // 성별 선택 핸들러
   const handleSelectGender = (gender: string | null) => {
     setSelectedGender(gender);
   };
 
+  // 생년월일 변경 핸들러
   const handleDateChange = useCallback((date: { year: string | null; month: string | null; day: string | null }) => {
     setBirthdate(date);
   }, []);
-  
 
+  // 제출 처리
   const handleSubmit = () => {
-    console.log("닉네임:", name); 
+    console.log("닉네임:", name);
     console.log("성별:", selectedGender);
     console.log("생년월일:", birthdate);
   };
 
+  // 모든 입력 폼이 유효한지 검사
   const isFormValid =
-    name.trim() !== "" &&
+    isNameValid && // 이름 유효성
     selectedGender !== null &&
     birthdate.year !== null &&
     birthdate.month !== null &&
@@ -48,9 +61,14 @@ export default function Signup() {
       <View className="w-full">
         <Header left={<FontText>{'< 회원가입'}</FontText>} />
       </View>
-      {/* 입력폼 */}
+
+      {/* 이름 입력폼 */}
       <View className="mt-11 mb-10 px-6">
-        <SignupForm name={name} onNameChange={handleNameChange} />
+        <SignupForm
+          name={name}
+          onNameChange={handleNameChange}
+          onValidChange={handleNameValidity} // 이름 유효성 변경
+        />
       </View>
 
       {/* 생년월일 */}
@@ -68,12 +86,17 @@ export default function Signup() {
         }`}
         onPress={() => {
           handleSubmit();
-          router.push('pages/Main/Main');
+          router.push("pages/Main/Main");
         }}
         disabled={!isFormValid}
       >
-        <FontText className={`font-extrabold text-[16px] ${isFormValid? "text-white" : "text-[#053C57]"}`}>완료</FontText>
-
+        <FontText
+          className={`font-extrabold text-[16px] ${
+            isFormValid ? "text-white" : "text-[#053C57]"
+          }`}
+        >
+          완료
+        </FontText>
       </TouchableOpacity>
     </SafeAreaView>
   );

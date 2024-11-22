@@ -4,6 +4,7 @@ import FontText from '@/components/theme/FontText';
 import Hr from '@/components/Hr';
 import Entypo from '@expo/vector-icons/Entypo';
 import ToggleButton from './ToggleButton'; // Import the ToggleButton component
+import { router } from 'expo-router';
 
 export default function MyPage() {
     const [isOn, setIsOn] = useState(false);
@@ -28,7 +29,7 @@ export default function MyPage() {
               </FontText>
               <TouchableOpacity
                 className="w-30 bg-gray-50 border-2 border-gray-200 items-center rounded-xl px-5 py-1"
-                onPress={() => Alert.alert('상세페이지')}
+                onPress={() => router.push('pages/MyPage/MyPageDetail')}
               >
                 <FontText className='text-[#1B1D1F]' style={{ fontSize: 16, fontWeight: '700' }}>
                   프로필 관리
