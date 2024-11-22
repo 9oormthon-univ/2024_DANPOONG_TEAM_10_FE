@@ -8,8 +8,8 @@ import GenderButton from "./molecules/GenderButton";
 import { router } from "expo-router";
 
 export default function Signup() {
-  const [name, setName] = useState<string>(""); // 이름 상태
-  const [isNameValid, setIsNameValid] = useState<boolean>(false); // 이름 유효성 상태
+  const [name, setName] = useState<string>("");
+  const [isNameValid, setIsNameValid] = useState<boolean>(false);
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const [birthdate, setBirthdate] = useState<{
     year: string | null;
@@ -31,17 +31,14 @@ export default function Signup() {
     setIsNameValid(isValid);
   };
 
-  // 성별 선택 핸들러
   const handleSelectGender = (gender: string | null) => {
     setSelectedGender(gender);
   };
 
-  // 생년월일 변경 핸들러
   const handleDateChange = useCallback((date: { year: string | null; month: string | null; day: string | null }) => {
     setBirthdate(date);
   }, []);
 
-  // 제출 처리
   const handleSubmit = () => {
     console.log("닉네임:", name);
     console.log("성별:", selectedGender);
@@ -50,7 +47,7 @@ export default function Signup() {
 
   // 모든 입력 폼이 유효한지 검사
   const isFormValid =
-    isNameValid && // 이름 유효성
+    isNameValid &&
     selectedGender !== null &&
     birthdate.year !== null &&
     birthdate.month !== null &&
@@ -67,7 +64,7 @@ export default function Signup() {
         <SignupForm
           name={name}
           onNameChange={handleNameChange}
-          onValidChange={handleNameValidity} // 이름 유효성 변경
+          onValidChange={handleNameValidity}
         />
       </View>
 
