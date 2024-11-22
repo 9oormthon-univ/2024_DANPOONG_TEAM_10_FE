@@ -57,7 +57,7 @@ export default function KaKaoLogin() {
       console.log("AccessToken:", accessToken);
       console.log("RefreshToken:", refreshToken);
 
-      router.push("pages/Signup/Signup");
+      router.push("pages/Modal/AccountModal");
     } catch (e) {
       if (axios.isAxiosError(e)) {
         console.error("Error requesting token:", e.response?.data || e.message);
