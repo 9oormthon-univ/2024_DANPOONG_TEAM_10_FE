@@ -122,7 +122,7 @@ export default function AccountModal() {
             <Pressable
                 onPress={() => {
                     handleSubmit();
-                    router.push('pages/Signup/Signup');
+                    router.push('pages/Account/KakaoLogin');
                   }}
                 disabled={!isAllRequiredChecked}
                 className={`w-[142px] mt-[60px] p-2 border-[#053C57] border-[1px] rounded-[20px] justify-center items-center ${

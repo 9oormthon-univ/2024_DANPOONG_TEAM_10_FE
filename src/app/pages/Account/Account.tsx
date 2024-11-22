@@ -10,7 +10,7 @@ export default function Account() {
       
       {/* LoginButton */}
       <TouchableOpacity 
-      onPress={() => router.push('pages/Modal/AccountModal')}>
+      onPress={() => router.push('pages/Modal/Modal')}>
         <Image source={require('@/assets/kakao-login.png')} />
       </TouchableOpacity>
     </View>
