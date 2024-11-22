@@ -65,6 +65,7 @@ export default function Signup() {
           name={name}
           onNameChange={handleNameChange}
           onValidChange={handleNameValidity}
+          placeholder="닉네임을 입력하세요"
         />
       </View>
 
@@ -83,7 +84,7 @@ export default function Signup() {
         }`}
         onPress={() => {
           handleSubmit();
-          router.push("pages/Main/Main");
+          router.push("pages/MyPage/MyPage");
         }}
         disabled={!isFormValid}
       >
