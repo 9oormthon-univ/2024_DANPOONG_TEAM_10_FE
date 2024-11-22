@@ -9,6 +9,7 @@ interface ProfileProps {
 
 export default function Profile({ initialProfileImage, onImageChange }: ProfileProps) {
   const [profileImage, setProfileImage] = useState<string | null>(initialProfileImage);
+  const defaultImageUrl = "https://i.ibb.co/4pRkP2f/userIcon.png" ; // 기본 이미지 URL
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -39,26 +40,10 @@ export default function Profile({ initialProfileImage, onImageChange }: ProfileP
 
   return (
     <View style={{ alignItems: "center", marginVertical: 20 }}>
-      {profileImage ? (
-        <Image
-          source={{ uri: profileImage }}
-          style={{ width: 100, height: 100, borderRadius: 50 }}
-        />
-      ) : (
-        <TouchableOpacity
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 50,
-            backgroundColor: "#cccccc",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={pickImage} 
-        >
-
-        </TouchableOpacity>
-      )}
+      <Image
+        source={{ uri: profileImage || defaultImageUrl }} // 기본 이미지를 표시
+        style={{ width: 100, height: 100, borderRadius: 50 }}
+      />
 
       <View style={{ flexDirection: "row", marginTop: 10 }}>
         <Button title="이미지 선택" onPress={pickImage} />
