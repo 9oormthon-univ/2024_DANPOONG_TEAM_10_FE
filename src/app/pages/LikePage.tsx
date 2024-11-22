@@ -61,6 +61,35 @@ export default function LikePage() {
     fetchData();
   }, []);
 
+  // 드롭다운 메뉴
+  const renderHeader = () => (
+    <View className="p-2 items-end">
+      <DropDownPicker
+        open={orderOpen}
+        value={order}
+        items={orderItems}
+        setOpen={setOrderOpen}
+        setValue={setOrder}
+        setItems={setOrderItems}
+        textStyle={{
+          fontSize: 16,
+          fontWeight: 'bold',
+        }}
+        containerStyle={{
+          width: '50%',
+        }}
+        style={{
+          borderWidth: 0,
+          //   boxShadow: '0 0 2 gray',
+        }}
+        dropDownContainerStyle={{
+          borderWidth: 0,
+          //   boxShadow: '0 0 2 gray',
+        }}
+      />
+    </View>
+  );
+
   const renderItem = ({ item, index }: { item: LikeData; index: number }) => (
     <View className="p-5 bg-gray-200 gap-2 mb-5 rounded-xl">
       <View className="flex-row justify-between">
@@ -84,46 +113,28 @@ export default function LikePage() {
     <View>
       <Header
         left={
-          <View>
-            <FontText>좋아요 표시한 항목</FontText>
-            <FontText>2</FontText>
+          <View className="flex-row gap-2">
+            <FontText className="text-2xl font-bold">
+              좋아요 표시한 항목
+            </FontText>
+            <FontText className="text-2xl font-bold color-gray-400">
+              {likeDataList.length}
+            </FontText>
           </View>
         }
       />
       <Hr />
 
-      {/* 드롭다운 */}
-      <View className="p-5 items-end">
-        <DropDownPicker
-          open={orderOpen}
-          value={order}
-          items={orderItems}
-          setOpen={setOrderOpen}
-          setValue={setOrder}
-          setItems={setOrderItems}
-          textStyle={{
-            fontSize: 20,
-            fontWeight: 'bold',
-          }}
-          containerStyle={{
-            width: '50%',
-          }}
-          style={{
-            borderWidth: 0,
-            boxShadow: '0 0 2 gray',
-          }}
-          dropDownContainerStyle={{
-            borderWidth: 0,
-            boxShadow: '0 0 2 gray',
-          }}
-        />
-      </View>
+      {renderHeader()}
 
-      <View className="p-5">
+      <View className="px-5">
         <FlatList
+          //   ListHeaderComponent={renderHeader}
           data={likeDataList}
           renderItem={renderItem}
           keyExtractor={(_, index) => index.toString()}
+          onEndReached={fetchData}
+          onEndReachedThreshold={0.5}
         />
       </View>
     </View>
