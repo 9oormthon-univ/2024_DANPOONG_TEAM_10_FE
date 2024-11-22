@@ -3,6 +3,7 @@ import Hr from '@/components/Hr';
 import Header from '@/components/layouts/Header';
 import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
+import { DropDownItems } from '@/utils/Types';
 import { useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -22,9 +23,7 @@ export default function LikePage() {
   // 드롭다운으로 선택된 값
   const [order, setOrder] = useState<string>('개최일');
   // 드롭다운에 들어가는 옵션 (라벨, 값)
-  const [orderItems, setOrderItems] = useState<
-    { label: string; value: string }[]
-  >([
+  const [orderItems, setOrderItems] = useState<DropDownItems[]>([
     { label: '축재 개최일 순', value: '개최일' },
     { label: '축재 종료일 순', value: '종료일' },
   ]);

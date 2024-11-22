@@ -9,3 +9,5 @@ export type ReviewType = {
   likes: number;
   isLiked: boolean;
 };
+
+export type DropDownItems = { label: string; value: string };
