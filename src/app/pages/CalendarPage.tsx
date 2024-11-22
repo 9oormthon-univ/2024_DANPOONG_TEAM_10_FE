@@ -1,10 +1,14 @@
 import Header from '@/components/layouts/Header';
 import FontText from '@/components/theme/FontText';
 import { DropDownItems } from '@/utils/Types';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { View } from 'react-native';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import DropDownPicker from 'react-native-dropdown-picker';
+
+type MarkedDateType = {
+  [key: string]: Object;
+};
 
 export default function CalendarPage() {
   // 드롭다운 옵션들
@@ -17,6 +21,11 @@ export default function CalendarPage() {
   // 드롭다운에 들어가는 옵션 (라벨, 값)
   const [yearItems, setYearItems] = useState<DropDownItems[]>([]);
   const [monthItems, setMonthItems] = useState<DropDownItems[]>([]);
+
+  // 달력의 현재 날짜
+  const [currentDate, setCurrentDate] = useState<string>('');
+  // 달력에 표시되는 마커
+  const [markedDate, setMarkedDate] = useState<MarkedDateType>();
 
   // 년 드롭다운 열기
   const openYear = () => {
@@ -72,7 +81,7 @@ export default function CalendarPage() {
   };
   LocaleConfig.defaultLocale = 'kr';
 
-  // 좋아요 누른 날
+  // 좋아요 누른 날 스타일
   const markedDateStyle: any = {
     customStyles: {
       container: {
@@ -85,8 +94,7 @@ export default function CalendarPage() {
       },
     },
   };
-
-  // 축제가 있는 날
+  // 축제가 있는 날 스타일
   const selectedDateStyle: any = {
     selected: true,
     customStyles: {
@@ -101,10 +109,29 @@ export default function CalendarPage() {
     },
   };
 
+  const fetchData = async () => {
+    setMarkedDate({
+      '2024-11-19': markedDateStyle,
+      '2024-11-23': selectedDateStyle,
+      '2024-11-20': markedDateStyle,
+      '2024-11-10': selectedDateStyle,
+    });
+  };
+
   useEffect(() => {
+    const formatedMonth = month.length === 1 ? '0' + month : month;
+    setCurrentDate(`${year}-${formatedMonth}-01`);
+  }, [year, month]);
+
+  useEffect(() => {
+    // 드롭다운 범위 지정
+    const today = new Date();
+    const thisMonth = today.getMonth() + 1;
+    setYear(today.getFullYear().toString());
+    setMonth(thisMonth.toString());
     // 2000년 이후 ~
     const yearArray = Array.from({
-      length: new Date().getFullYear() - 1999,
+      length: today.getFullYear() - 1999,
     })
       .map((_, i) => {
         return {
@@ -114,7 +141,6 @@ export default function CalendarPage() {
       })
       .reverse();
     setYearItems(yearArray);
-    setYear(new Date().getFullYear().toString());
 
     // 1~12월
     const monthArray = Array.from({
@@ -126,7 +152,9 @@ export default function CalendarPage() {
       };
     });
     setMonthItems(monthArray);
-    setMonth(new Date().getMonth().toString());
+
+    fetchData();
+    setCurrentDate(new Date().toString());
   }, []);
 
   return (
@@ -182,17 +210,18 @@ export default function CalendarPage() {
       />
       {/* 달력 */}
       <Calendar
+        current={currentDate}
+        key={currentDate}
         renderHeader={() => null}
         hideArrows={true}
         markingType={'custom'}
-        markedDates={{
-          '2024-11-19': markedDateStyle,
-          '2024-11-23': selectedDateStyle,
-        }}
+        markedDates={markedDate}
         theme={{
           textDayHeaderFontSize: 20,
           textDayHeaderFontWeight: 'bold',
-          todayTextColor: '#053C57',
+          // todayTextColor: '#053C57',
+          todayTextColor: '#ffffff',
+          todayBackgroundColor: '#c82a2a',
         }}
       />
       <View></View>
