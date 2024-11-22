@@ -5,6 +5,8 @@ import SignupForm from "./organism/SignupForm";
 import BirthdatePicker from "./organism/BirthdatePicker";
 import Header from "@/components/layouts/Header";
 import GenderButton from "./molecules/GenderButton";
+import { router } from "expo-router";
+import Main from "../Main/Main";
 
 export default function Signup() {
   const [name, setName] = useState<string>("");
@@ -64,7 +66,10 @@ export default function Signup() {
         className={`w-2/5 rounded-full py-2 items-center mt-40 mb-3 ${
           isFormValid ? "bg-[#053C57]" : "border-[1px] border-[#053C57] bg-[#F7F8F9]"
         }`}
-        onPress={handleSubmit}
+        onPress={() => {
+          handleSubmit();
+          router.push('pages/Main/Main');
+        }}
         disabled={!isFormValid}
       >
         <FontText className={`font-extrabold text-[16px] ${isFormValid? "text-white" : "text-[#053C57]"}`}>완료</FontText>
