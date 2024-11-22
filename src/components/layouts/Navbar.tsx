@@ -13,7 +13,7 @@ export default function Navbar() {
     router.replace('/pages/LikePage');
   };
   const onCalendarClick = () => {
-    router.replace('/pages/Calendar');
+    router.replace('/pages/CalendarPage');
   };
   const onProfileClick = () => {
     router.replace('/pages/Main');
