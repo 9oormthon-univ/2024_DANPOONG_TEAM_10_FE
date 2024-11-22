@@ -1,63 +1,58 @@
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import FontText from './theme/FontText';
 import Stars from './Stars';
 import { ReviewType } from '@/utils/Types';
 
 interface ReviewCardProps {
   review: ReviewType;
-  onLikeClick: Function;
-  index: number;
-  nickname: string;
-  stars: number;
+  onLikeClick: (isLike: boolean) => void;
 }
 
 //리뷰 페이지 카드
-export default function ReviewCard({
-  review,
-  onLikeClick,
-  index,
-  nickname,
-  stars,
-}: ReviewCardProps) {
+export default function ReviewCard({ review, onLikeClick }: ReviewCardProps) {
   return (
     <View className="gap-5">
       {/* 정보들 */}
       <View className="flex-row justify-between">
+        {/* 프로필 */}
         <View className="flex-row gap-5">
-          {/* 프로필 */}
           <View className="flex-row gap-3 items-center">
             <View className="h-16 w-16 bg-black rounded-full" />
             <View className="gap-2">
-              <FontText className="text-2xl font-bold">{nickname}</FontText>
+              <FontText className="text-2xl font-bold">
+                {review.nickname}
+              </FontText>
               <View className="flex-row gap-2">
-                <Stars count={stars} />
+                <Stars count={review.stars} />
                 <FontText>2024.11.23</FontText>
               </View>
             </View>
           </View>
         </View>
+        {/* 더보기 */}
         <TouchableOpacity>
           <FontText>...</FontText>
         </TouchableOpacity>
       </View>
-      {/* 이미지 */}
-      <View>
+      {/* 내용 */}
+      <FontText>{review.content}</FontText>
+
+      {/* 이미지들 */}
+      <ScrollView horizontal>
         {review.contentImage.length !== 0 &&
           review.contentImage.map((image, i) => (
-            <View key={i} className="min-h-60 bg-gray-300 rounded-xl">
+            <View key={i} className="h-60 w-60 mr-5 bg-gray-300 rounded-xl">
               <Image />
             </View>
           ))}
-      </View>
-      {/* 내용 */}
-      <FontText>{review.content}</FontText>
+      </ScrollView>
       {/* 좋야오 버튼 */}
       <View className="flex-row justify-between">
         <View className="flex-row gap-3">
           {review.isLiked ? (
             <TouchableOpacity
               onPress={() => {
-                onLikeClick(index, false);
+                onLikeClick(false);
               }}
               className="h-5 w-5 border-2 bg-black"
             >
@@ -66,7 +61,7 @@ export default function ReviewCard({
           ) : (
             <TouchableOpacity
               onPress={() => {
-                onLikeClick(index, true);
+                onLikeClick(true);
               }}
               className="h-5 w-5 border-2"
             >
