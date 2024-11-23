@@ -67,7 +67,9 @@ export default function AccountModal() {
         entering={SlideInDown}
         className="w-full px-5 justify-center bg-white rounded-t-[20px]"
       >
-        <FontText className="font-extrabold text-xl mb-2 mt-8">약관에 동의해주세요.</FontText>
+        <FontText className="font-extrabold text-xl mb-2 mt-8">
+          약관에 동의해주세요.
+        </FontText>
 
         {/* 약관 전체 동의 */}
         <Pressable
@@ -76,7 +78,9 @@ export default function AccountModal() {
         >
           <View
             className={`w-6 h-6 mr-2 rounded-full border-2 ${
-              checkboxes.all ? 'bg-[#053C57] border-[#053C57]' : 'border-[#9FA4A9]'
+              checkboxes.all
+                ? 'bg-[#053C57] border-[#053C57]'
+                : 'border-[#9FA4A9]'
             }`}
           />
           <FontText className="font-extrabold text-xl">약관 전체 동의</FontText>
@@ -84,55 +88,80 @@ export default function AccountModal() {
         <FontText className="font-bold text-sm text-[#9FA4A9] mb-2">
           서비스 이용을 위해 아래 약관에 모두 동의합니다.
         </FontText>
-<Line/>
+        <Line />
         {/* 개별 약관 */}
         {[
-            { key: 'over14', label: '(필수) 만 14세 이상입니다.', optional: false },
-            { key: 'termsOfService', label: '(필수) 서비스 이용 약관', optional: false },
-            { key: 'personalInfo', label: '(필수) 개인 정보 수집 및 이용', optional: false },
-            { key: 'locationService', label: '(필수) 위치 기반 서비스 이용 약관', optional: false },
-            { key: 'marketingInfo', label: '(선택) 마케팅 정보 수신 동의', optional: true },
-            ].map(({ key, label, optional }) => (
-            <Pressable
-                key={key}
-                onPress={() => handleCheckboxChange(key as keyof CheckboxState)}
-                className="flex-row justify-between items-center mb-2"
-            >
-                <FontText className="font-bold text-base">
-                {optional ? (
-                    <>
-                    <Text className="text-[#9FA4A9]">(선택)</Text> 마케팅 정보 수신 동의
-                    </>
-                ) : (
-                    label
-                )}
-                </FontText>
-                <View
-                className={`w-5 h-5 mr-2 rounded-full border-2  ${
-                    checkboxes[key as keyof CheckboxState]
-                    ? 'bg-[#053C57] border-[#053C57]'
-                    : 'border-[#9FA4A9]'
-                }`}
-                />
-            </Pressable>
-            ))}
+          {
+            key: 'over14',
+            label: '(필수) 만 14세 이상입니다.',
+            optional: false,
+          },
+          {
+            key: 'termsOfService',
+            label: '(필수) 서비스 이용 약관',
+            optional: false,
+          },
+          {
+            key: 'personalInfo',
+            label: '(필수) 개인 정보 수집 및 이용',
+            optional: false,
+          },
+          {
+            key: 'locationService',
+            label: '(필수) 위치 기반 서비스 이용 약관',
+            optional: false,
+          },
+          {
+            key: 'marketingInfo',
+            label: '(선택) 마케팅 정보 수신 동의',
+            optional: true,
+          },
+        ].map(({ key, label, optional }) => (
+          <Pressable
+            key={key}
+            onPress={() => handleCheckboxChange(key as keyof CheckboxState)}
+            className="flex-row justify-between items-center mb-2"
+          >
+            <FontText className="font-bold text-base">
+              {optional ? (
+                <>
+                  <Text className="text-[#9FA4A9]">(선택)</Text> 마케팅 정보
+                  수신 동의
+                </>
+              ) : (
+                label
+              )}
+            </FontText>
+            <View
+              className={`w-5 h-5 mr-2 rounded-full border-2  ${
+                checkboxes[key as keyof CheckboxState]
+                  ? 'bg-[#053C57] border-[#053C57]'
+                  : 'border-[#9FA4A9]'
+              }`}
+            />
+          </Pressable>
+        ))}
 
         {/* 다음 버튼 */}
         <View className="justify-center items-center">
-            <Pressable
-                onPress={() => {
-                    handleSubmit();
-                    router.push('pages/Signup/Signup');
-                  }}
-                disabled={!isAllRequiredChecked}
-                className={`w-[142px] mt-[60px] p-2 border-[#053C57] border-[1px] rounded-[20px] justify-center items-center ${
-                isAllRequiredChecked ? 'bg-[#053C57]' : 'bg-[#F7F8F9]'
-                }`}
-            >
-            <Text  className={`font-bold ${
+          <Pressable
+            onPress={() => {
+              handleSubmit();
+              router.push('pages/Signup');
+            }}
+            disabled={!isAllRequiredChecked}
+            className={`w-[142px] mt-[60px] p-2 border-[#053C57] border-[1px] rounded-[20px] justify-center items-center ${
+              isAllRequiredChecked ? 'bg-[#053C57]' : 'bg-[#F7F8F9]'
+            }`}
+          >
+            <Text
+              className={`font-bold ${
                 isAllRequiredChecked ? 'text-[#FFFFFF]' : 'text-[#053C57]'
-                }`}>다음</Text>
-            </Pressable>
+              }`}
+            >
+              다음
+            </Text>
+          </Pressable>
         </View>
       </Animated.View>
     </Animated.View>
