@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
+import festivalReducer from './festivalSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: { festivalData: festivalReducer },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

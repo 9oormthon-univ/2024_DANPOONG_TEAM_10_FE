@@ -11,3 +11,15 @@ export type ReviewType = {
 };
 
 export type DropDownItems = { label: string; value: string };
+
+export type FestivalData = {
+  title: string;
+  subTitle: string;
+  poster: string;
+  status: boolean;
+  date: string;
+  describe: string;
+  location: string;
+  latitude: number;
+  longitude: number;
+};

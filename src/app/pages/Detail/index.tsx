@@ -9,8 +9,10 @@ import { useRouter } from 'expo-router';
 import Header from '@/components/layouts/Header';
 import Title from '@/components/theme/TitleText';
 import Timeline from '@/components/Timeline';
-import { TimelineData } from '@/utils/Types';
+import { FestivalData, TimelineData } from '@/utils/Types';
 import FestStatus from '@/components/FestStatus';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/stores/store';
 
 type ReviewType = {
   profile: string;
@@ -25,6 +27,8 @@ export default function Detail() {
   const router = useRouter();
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
   const [timeline, setTimeline] = useState<TimelineData[]>([]);
+
+  const festivalData = useSelector((state: RootState) => state.festivalData);
 
   // 데이터 불러오기
   const fetchData = async () => {
@@ -113,10 +117,10 @@ export default function Detail() {
               <FestStatus isOpen={true} />
             </View>
             <FontText className="text-xl font-bold">
-              2023 거창 마당 대축제
+              {festivalData.title}
             </FontText>
-            <FontText>거창 스포츠파크</FontText>
-            <FontText>2020-02-02 ~ 2023-03-03</FontText>
+            <FontText>{festivalData.subTitle}</FontText>
+            <FontText>{festivalData.date}</FontText>
           </View>
         </View>
         <Hr />
@@ -126,10 +130,10 @@ export default function Detail() {
           <View className="min-h-60 rounded-xl overflow-hidden bg-gray-200">
             <Map inPage />
           </View>
-          <View className="min-h-60 bg-gray-200 rounded-xl">
+          {/* <View className="min-h-60 bg-gray-200 rounded-xl">
             <FontText className="font-bold">인근 주차장</FontText>
             <FontText className="font-bold">대중교통</FontText>
-          </View>
+          </View> */}
         </View>
         <Hr />
         {/* 날씨? */}
@@ -189,9 +193,9 @@ export default function Detail() {
         <View className="flex-1 p-5 min-h-72 gap-4">
           <View className="flex-row items-center gap-6">
             <Title>타임테이블</Title>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <FontText>11월 23일</FontText>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <Timeline timelineData={timeline} />
         </View>
