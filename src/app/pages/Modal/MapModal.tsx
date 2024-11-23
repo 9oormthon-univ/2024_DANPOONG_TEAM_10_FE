@@ -5,6 +5,9 @@ import { router } from 'expo-router';
 import FontText from '@/components/theme/FontText';
 import Line from '@/components/Line';
 
+import Map_1Svg from '@/components/svgs/Map_1Svg';
+import Map_2Svg from '@/components/svgs/Map_2Svg';
+
 // 선택 가능한 키 타입 정의
 type CheckboxKey =
   | 'seoul'
@@ -39,7 +42,14 @@ export default function MapModal() {
           알아 보고 싶은 지역을 선택해요
         </FontText>
 
-        <Line />
+        {/* <View className="h-[400] w-full items-center overflow-hidden">
+          <View className="absolute flex-1 w-full h-full justify-center items-center">
+            <Map_1Svg heigth={530} width={357} />
+          </View>
+          <View className="absolute flex-1 w-full h-full justify-center items-center">
+            <Map_2Svg heigth={300} width={280} />
+          </View>
+        </View> */}
 
         {/* 개별 지역 선택 */}
         <SafeAreaView className="flex-row flex-wrap">
@@ -56,7 +66,6 @@ export default function MapModal() {
               key={key}
               onPress={() => {
                 handleCheckboxChange(key as CheckboxKey);
-                console.log(key);
                 router.push('pages/Main');
               }}
               className="flex-row pr-[75px] mb-2"
