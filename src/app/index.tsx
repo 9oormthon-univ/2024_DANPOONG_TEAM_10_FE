@@ -8,7 +8,7 @@ export default function App() {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => {
-      router.replace('/pages/Detail');
+      router.replace('/pages/Main');
     }, 1000);
   }, []);
   // 작업 테스트용 라우팅
