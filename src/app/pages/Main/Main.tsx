@@ -5,6 +5,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import Hr from '@/components/Hr';
 import ImageSlider from './organism/ImageSlider';
 import { router } from 'expo-router';
+import { routeToScreen } from 'expo-router/build/useScreens';
 
 export default function Main() {
 
@@ -19,7 +20,9 @@ export default function Main() {
                 <View className='mr-2'>
                     <FontText style={{fontSize:16, fontWeight:800}}>도 이름</FontText>
                 </View>
-                <Entypo name="chevron-down" size={16} color="#1B1D1F" />    
+                <TouchableOpacity onPress={()=> router.push('pages/Modal/MapModal')}>
+                <Entypo name="chevron-down" size={16} color="#1B1D1F" />
+                </TouchableOpacity>   
             </View>
             <ScrollView className='px-5 mt-7 mb-7' horizontal={true} >
                 <TouchableOpacity
