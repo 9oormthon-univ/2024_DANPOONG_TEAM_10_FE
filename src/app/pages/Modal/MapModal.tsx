@@ -20,12 +20,7 @@ export default function MapModal() {
 
   // 체크박스 상태 변경
   const handleCheckboxChange = (key: CheckboxKey) => {
-    setSelectedKey((prev) => (prev === key ? null : key));
-  };
-
-  // 선택한 항목 출력
-  const handleSubmit = () => {
-    console.log('선택한 항목:', selectedKey);
+    setSelectedKey(key);
   };
 
   return (
@@ -61,7 +56,7 @@ export default function MapModal() {
               key={key}
               onPress={() => {
                 handleCheckboxChange(key as CheckboxKey);
-                handleSubmit();
+                console.log(key);
                 router.push('pages/Main');
               }}
               className="flex-row pr-[75px] mb-2"
@@ -79,28 +74,6 @@ export default function MapModal() {
             </Pressable>
           ))}
         </SafeAreaView>
-
-        {/* 완료 버튼
-        <View className="justify-center items-center">
-          <Pressable
-            onPress={() => {
-              handleSubmit();
-              router.push("pages/Main/Main");
-            }}
-            disabled={!selectedKey}
-            className={`w-[142px] mt-[60px] p-2 border-[#053C57] border-[1px] rounded-[20px] justify-center items-center ${
-              selectedKey ? "bg-[#053C57]" : "bg-[#F7F8F9]"
-            }`}
-          >
-            <FontText
-              className={`font-bold ${
-                selectedKey ? "text-[#FFFFFF]" : "text-[#053C57]"
-              }`}
-            >
-              완료
-            </FontText>
-          </Pressable>
-        </View> */}
       </Animated.View>
     </Animated.View>
   );
