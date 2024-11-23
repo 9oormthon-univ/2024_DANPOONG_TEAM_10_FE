@@ -59,7 +59,15 @@ export default function Review() {
         <View className="flex-row py-5 items-center">
           <View className="flex-1 items-center gap-5">
             <FontText className="text-xl font-bold">방분자 총 평점</FontText>
-            <FontText className="font-bold text-3xl">5.0</FontText>
+            <FontText className="font-bold text-3xl">
+              {reviewData.reduce((acc, value, index, array) => {
+                acc += value.stars; // 누적합 계산
+                if (index === array.length - 1) {
+                  return acc / array.length; // 마지막 요소에서 평균 계산
+                }
+                return acc;
+              }, 0)}
+            </FontText>
             <Stars count={5} />
           </View>
           {/* <View className="h-20 w-1 bg-gray-200" />

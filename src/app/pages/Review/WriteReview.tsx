@@ -68,8 +68,11 @@ export default function WriteReview() {
       <ScrollView>
         {/* 축재 정보 */}
         <View className=" flex-row p-5 gap-5">
-          <View className="w-[120] min-h-[120] bg-gray-200 rounded-xl overflow-hidden">
-            <Image source={{ uri: festivalData.poster }} />
+          <View className="w-[150] h-[200] bg-gray-200 rounded-xl overflow-hidden">
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={{ uri: festivalData.poster }}
+            />
           </View>
           <View className="w-1/2 gap-2 pr-5">
             <View className="max-w-[120]">

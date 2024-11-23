@@ -15,7 +15,9 @@ export default function FestivalList() {
   }, []);
 
   if (festivalData.length === 0) {
-    return <Text className="text-center text-lg font-semibold mt-5">Loading...</Text>;
+    return (
+      <Text className="text-center text-lg font-semibold mt-5">Loading...</Text>
+    );
   }
 
   return (
@@ -24,8 +26,11 @@ export default function FestivalList() {
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <View className="flex-row p-3 border-b border-gray-300 items-center">
-          <Image source={{ uri: item.image }} className="w-[100px] h-[100px] rounded-l mr-4" 
-           resizeMode="cover"/>
+          <Image
+            source={{ uri: item.image }}
+            className="w-[100px] h-[100px] rounded-l mr-4"
+            resizeMode="cover"
+          />
           <View className="flex-1">
             <Text className="text-lg font-bold">{item.title}</Text>
             <Text className="text-sm text-gray-500">{item.date}</Text>

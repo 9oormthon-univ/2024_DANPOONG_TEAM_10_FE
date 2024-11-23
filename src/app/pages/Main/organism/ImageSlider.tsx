@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, View, Image, ScrollView, Text, Touchable, TouchableOpacity } from 'react-native';
+import {
+  Dimensions,
+  View,
+  Image,
+  ScrollView,
+  Text,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import FontText from '@/components/theme/FontText';
 import { router } from 'expo-router';
 import { UseSelector, useDispatch, useSelector } from 'react-redux';
@@ -9,15 +17,20 @@ import { FestivalData } from '@/utils/Types';
 
 const { width } = Dimensions.get('window');
 
-
-export default function ImageSlider({festivalData}:{festivalData: FestivalData[]}) {
+export default function ImageSlider({
+  festivalData,
+}: {
+  festivalData: FestivalData[];
+}) {
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const selectedFestival = useSelector((state: RootState) => state.festivalData);
+  const selectedFestival = useSelector(
+    (state: RootState) => state.festivalData
+  );
   const dispatch = useDispatch();
-  const onClicked = (index:number) => {
-   router.push('pages/Detail')
-   dispatch(setFestivalAction({ newState:festivalData[index] }));
+  const onClicked = (index: number) => {
+    router.push('pages/Detail');
+    dispatch(setFestivalAction({ newState: festivalData[index] }));
   };
 
   // 자동 슬라이드
@@ -25,7 +38,10 @@ export default function ImageSlider({festivalData}:{festivalData: FestivalData[]
     const interval = setInterval(() => {
       const nextIndex = (currentIndex + 1) % festivalData.length;
       if (scrollViewRef.current) {
-        scrollViewRef.current.scrollTo({ x: width * nextIndex, animated: true });
+        scrollViewRef.current.scrollTo({
+          x: width * nextIndex,
+          animated: true,
+        });
       }
       setCurrentIndex(nextIndex);
     }, 3000);
@@ -40,6 +56,7 @@ export default function ImageSlider({festivalData}:{festivalData: FestivalData[]
   return (
     <View>
       <ScrollView
+        nestedScrollEnabled={true}
         ref={scrollViewRef}
         horizontal
         pagingEnabled
@@ -50,16 +67,20 @@ export default function ImageSlider({festivalData}:{festivalData: FestivalData[]
             key={index}
             className="justify-center items-center"
             style={{ width: width, height: width }}
-            onPress={()=>onClicked(index)}
+            onPress={() => onClicked(index)}
           >
             <Image
               source={{ uri: festival.poster }}
-               className="w-4/5  h-5/6 rounded-lg"
+              className="w-4/5  h-5/6 rounded-lg"
               resizeMode="cover"
             />
-             <FontText className="font-bold text-base text-black  ">{festival.title}</FontText>
-             <FontText className="font-bold text-xs text-black ">{festival.date}</FontText>
-             </TouchableOpacity>
+            <FontText className="font-bold text-base text-black">
+              {festival.title}
+            </FontText>
+            <FontText className="font-bold text-xs text-black ">
+              {festival.date}
+            </FontText>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

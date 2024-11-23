@@ -5,7 +5,8 @@ import { FestivalData } from '@/utils/Types';
 const initialState: FestivalData = {
   title: '구름톤 유니브 3기 단풍톤',
   subTitle: '카카오 AI 캠퍼스',
-  poster: '',
+  poster:
+    'https://images-ext-1.discordapp.net/external/dK56JHhzADIR9W1YdlQuJ5XyMHDVdkVJb4xwZ5eDAsY/https/i.ibb.co/pfgRwzY/danpung-Thon.png?format=webp&quality=lossless&width=480&height=660',
   status: true,
   date: '2024.11.23 ~ 2024.11.24',
   describe:

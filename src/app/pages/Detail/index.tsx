@@ -83,7 +83,10 @@ export default function Detail() {
         {/* 축재 정보 */}
         <View className="flex-1 flex-row p-5 gap-5">
           <View className="w-1/2 min-h-[220] bg-gray-200 rounded-xl overflow-hidden">
-            <Image />
+            <Image
+              style={{ width: '100%', height: '100%' }}
+              source={{ uri: festivalData.poster }}
+            />
           </View>
           <View className="w-1/2 gap-2 pr-5">
             <View className="max-w-[120]">
