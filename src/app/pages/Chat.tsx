@@ -2,7 +2,7 @@ import Header from '@/components/layouts/Header';
 import FontText from '@/components/theme/FontText';
 import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 
 type ChatData = {
   nickname: string;
@@ -14,11 +14,21 @@ type ChatData = {
 };
 
 export default function Chat() {
+  // 채팅 데이터
   const [chatData, setChatData] = useState<ChatData[]>([]);
+  // 입력한 메시지
+  const [message, setMessage] = useState<string>('');
 
+  // 로그인한 유저 (async storage에서 가져오기)
   const username = '나';
 
+  const sendMessage = async () => {
+    console.log(message);
+    return;
+  };
+
   useEffect(() => {
+    console.log(ChatLeftSvg);
     setChatData([
       {
         nickname: '유저',
@@ -196,7 +206,7 @@ export default function Chat() {
       )}
 
       {item.isFirst && (
-        <View className="w-5 h-5 bg-gray-400 absolute top-[50] left-[4]" />
+        <View className="w-5 h-5  absolute top-[50] left-[4] bg-red-500"></View>
       )}
       <View className="flex-row mt-3 justify-start items-end gap-3 ml-5  w-full">
         <FontText className="bg-gray-400 p-2 rounded-xl max-w-[70%]">
@@ -239,12 +249,26 @@ export default function Chat() {
           </View>
         }
       />
-      <View className="p-5 flex-1">
+      <View className="px-5 flex-1">
         <FlatList
           data={chatData}
           renderItem={renderItem}
           keyExtractor={(_, index) => index.toString()}
         />
+      </View>
+      <View className="p-5 flex-row gap-5">
+        <TextInput
+          className="border p-3 rounded-xl flex-1"
+          placeholder="메시지를 입력하세요"
+          onChangeText={setMessage}
+          onSubmitEditing={sendMessage}
+        />
+        <TouchableOpacity
+          onPress={sendMessage}
+          className="p-3 w-10 h-10 bg-gray-500 rounded-full"
+        >
+          <View />
+        </TouchableOpacity>
       </View>
     </View>
   );
