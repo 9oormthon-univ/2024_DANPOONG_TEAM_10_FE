@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { Image, View } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 // 리뷰 별점
 export default function Stars({ count }: { count: number }) {
   // 갯수에 맞춰서 별점 리스트 생성
@@ -11,9 +13,15 @@ export default function Stars({ count }: { count: number }) {
     <View className="flex-row gap-2">
       {starsList.map((star, i) => {
         return (
-          <View
+          // <View
+          //   key={i}
+          //   className={`h-5 w-5 rounded-full ${star ? 'bg-black' : 'bg-gray-400'}`}
+          // />
+          <AntDesign
             key={i}
-            className={`h-5 w-5 rounded-full ${star ? 'bg-black' : 'bg-gray-400'}`}
+            name="star"
+            size={24}
+            color={star ? '#053C57' : 'gray'}
           />
         );
       })}

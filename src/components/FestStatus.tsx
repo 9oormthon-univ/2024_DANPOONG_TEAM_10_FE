@@ -9,15 +9,15 @@ interface FestStatusProps {
 export default function FestStatus({ isOpen }: FestStatusProps) {
   return (
     <View
-      className={`px-5 border-2 border-gray-600 rounded-full justify-center text-center overflow-hidden
+      className={`px-2 border-2 border-gray-600 rounded-full justify-center text-center overflow-hidden
         ${isOpen ? 'bg-gray-600' : 'bg-white'}`}
     >
       {isOpen ? (
-        <FontText className="text-2xl color-white text-center font-bold">
+        <FontText className="text-xl color-white text-center font-bold">
           축제 진행 중
         </FontText>
       ) : (
-        <FontText className="text-2xl text-center font-bold ">
+        <FontText className="text-xl text-center font-bold ">
           예정된 축제
         </FontText>
       )}

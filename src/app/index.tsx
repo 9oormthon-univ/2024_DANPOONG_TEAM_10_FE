@@ -13,10 +13,9 @@ export default function App() {
   }, []);
   // 작업 테스트용 라우팅
 
-
   return (
     <View>
-      <Link href="/pages/Account/Account">Account</Link>
+      <Link href="/pages/Account">Account</Link>
       <FontText>Index</FontText>
     </View>
   );
