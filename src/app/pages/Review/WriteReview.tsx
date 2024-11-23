@@ -13,9 +13,15 @@ import { Image } from 'expo-image';
 import Title from '@/components/theme/TitleText';
 import { useRouter } from 'expo-router';
 import FestStatus from '@/components/FestStatus';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/stores/store';
+import { AntDesign, Entypo } from '@expo/vector-icons';
+import TitleText from '@/components/theme/TitleText';
 
 export default function WriteReview() {
   const router = useRouter();
+
+  const festivalData = useSelector((state: RootState) => state.festivalData);
 
   // 사용자 입력 이미지
   const [imageList, setImageList] = useState<string[]>([]);
@@ -52,8 +58,9 @@ export default function WriteReview() {
     <View className="flex-1">
       <Header
         left={
-          <TouchableOpacity onPress={goBack}>
-            <Title>{'< 리뷰 작성하기'}</Title>
+          <TouchableOpacity onPress={goBack} className="flex-row items-center">
+            <Entypo name="chevron-small-left" size={24} color="black" />
+            <Title>{'리뷰 작성하기'}</Title>
           </TouchableOpacity>
         }
       />
@@ -62,23 +69,23 @@ export default function WriteReview() {
         {/* 축재 정보 */}
         <View className=" flex-row p-5 gap-5">
           <View className="w-[120] min-h-[120] bg-gray-200 rounded-xl overflow-hidden">
-            <Image />
+            <Image source={{ uri: festivalData.poster }} />
           </View>
           <View className="w-1/2 gap-2 pr-5">
             <View className="max-w-[120]">
               <FestStatus isOpen={true} />
             </View>
             <FontText className="text-xl font-bold">
-              2023 거창 마당 대축제
+              {festivalData.title}
             </FontText>
-            <FontText>거창 스포츠파크</FontText>
-            <FontText>2020-02-02 ~ 2023-03-03</FontText>
+            <FontText>{festivalData.subTitle}</FontText>
+            <FontText>{festivalData.date}</FontText>
           </View>
         </View>
 
         {/* 별점 */}
         <View className="p-5 gap-5">
-          <FontText>이 축제에 대해 얼마나 만족하시나요?</FontText>
+          <TitleText>이 축제에 대해 얼마나 만족하시나요?</TitleText>
           <View className="rounded-xl bg-gray-200 p-6 flex-row gap-3 justify-center">
             {Array.from({ length: 5 }).map((_, i) => (
               <TouchableOpacity
@@ -87,9 +94,14 @@ export default function WriteReview() {
                   setStars(i + 1);
                 }}
               >
-                <View
+                {/* <View
                   className={`rounded-full h-12 w-12 ${i >= stars ? 'bg-gray-500' : 'bg-gray-900'}`}
-                />
+                /> */}
+                {i >= stars ? (
+                  <AntDesign name="star" size={24} color={'gray'} />
+                ) : (
+                  <AntDesign name="star" size={24} color={'#053C57'} />
+                )}
               </TouchableOpacity>
             ))}
           </View>
@@ -97,7 +109,7 @@ export default function WriteReview() {
 
         {/* 축제 후기 */}
         <View className="p-5 gap-5">
-          <FontText>축제 후기</FontText>
+          <TitleText>축제 후기</TitleText>
           <TextInput
             onChangeText={setContent}
             placeholder="다른 고객님에게 도움이 되도록 축제에 대한 솔직한 평가를 남겨주세요. (축제와 관계 없는 내용, 지나친 비난은 관리자에 의해 삭제될 수 있습니다.)"
@@ -111,17 +123,20 @@ export default function WriteReview() {
         {/* 사진 첨부하기 */}
         <View className="p-5 gap-5">
           <View>
-            <FontText>사진 첨부하기</FontText>
-            <FontText>최대 n장까지 첨부 가능합니다.</FontText>
+            <TitleText>사진 첨부하기</TitleText>
+            <FontText>최대 4장까지 첨부 가능합니다.</FontText>
           </View>
           <ScrollView horizontal className="py-5">
             {/* 이미지 추가 버튼 */}
-            <TouchableOpacity
-              onPress={pickImage}
-              className="mr-5 h-[120] w-[120] bg-gray-300 rounded-xl justify-center items-center"
-            >
-              <FontText>+</FontText>
-            </TouchableOpacity>
+            {imageList.length < 4 && (
+              <TouchableOpacity
+                onPress={pickImage}
+                className="mr-5 h-[120] w-[120] bg-gray-300 rounded-xl justify-center items-center"
+              >
+                <Entypo name="plus" size={40} color="white" />
+              </TouchableOpacity>
+            )}
+
             {/* 이미지들 */}
             {imageList.length !== 0 &&
               imageList.map((image, i) => (
@@ -142,7 +157,7 @@ export default function WriteReview() {
                     }}
                     className="h-8 w-8 bg-white absolute items-center justify-center rounded-full top-[-10] right-[-10] border "
                   >
-                    <FontText>x</FontText>
+                    <Entypo name="cross" size={20} color="black" />
                   </TouchableOpacity>
                 </View>
               ))}

@@ -15,6 +15,7 @@ const initialState: ReviewType[] = [
     ],
     likes: 4,
     isLiked: true,
+    date: '2024.11.23',
   },
   {
     profile:
@@ -28,6 +29,7 @@ const initialState: ReviewType[] = [
     ],
     likes: 5,
     isLiked: false,
+    date: '2024.11.23',
   },
   {
     profile:
@@ -39,6 +41,7 @@ const initialState: ReviewType[] = [
     contentImage: [],
     likes: 1,
     isLiked: false,
+    date: '2024.11.24',
   },
 ];
 
@@ -50,13 +53,31 @@ const setReview = (
   state = newState;
 };
 
+const setReviewLike = (
+  state: WritableDraft<ReviewType[]>,
+  action: PayloadAction<{ isLike: boolean; index: number }>
+) => {
+  const { isLike, index } = action.payload;
+
+  state[index].isLiked = isLike;
+  if (isLike) {
+    state[index].likes += 1;
+  } else {
+    state[index].likes -= 1;
+  }
+};
+
 export const reviewSlice = createSlice({
   name: 'reviewSlice',
   initialState,
   reducers: {
     setReview,
+    setReviewLike,
   },
 });
 
 export default reviewSlice.reducer;
-export const { setReview: setReviewAction } = reviewSlice.actions;
+export const {
+  setReview: setReviewAction,
+  setReviewLike: setReviewLikeAction,
+} = reviewSlice.actions;
