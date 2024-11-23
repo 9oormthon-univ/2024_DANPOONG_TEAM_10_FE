@@ -12,7 +12,11 @@
     <script type="text/javascript">
       // script 로드 완료를 확인하는 함수
       function onload() {
-        window.ReactNativeWebView.postMessage('loaded');
+        // window.ReactNativeWebView.postMessage('loaded');
+
+        const latitude = 37.35174165739167;
+        const longitude = 127.07188065701887;
+        makeMap(latitude, longitude);
       }
       window.onload = onload();
 
@@ -36,12 +40,12 @@
         // 커스텀 오버레이
         const position = new kakao.maps.LatLng(latitude, longitude);
         const content =
-          '<div style="background: white;  padding: 10px 30px; box-shadow: 0 0 5px grey; border-radius:5px; text-align:center">현위치</div>';
+          '<div style="background: white;  padding: 5px 20px; box-shadow: 0 0 5px grey; border-radius:5px; text-align:center">카카오 AI 캠퍼스</div>';
         const customOverlay = new kakao.maps.CustomOverlay({
           map: map,
           position: position,
           content: content,
-          yAnchor: 3,
+          yAnchor: 2.5,
         });
       }
       window.makeMap = makeMap;

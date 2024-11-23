@@ -2,15 +2,19 @@ import Hr from '@/components/Hr';
 import Stars from '@/components/Stars';
 import FontText from '@/components/theme/FontText';
 import { useEffect, useState } from 'react';
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import Map from './Map';
 import CustomMap from './CustomMap';
 import { useRouter } from 'expo-router';
 import Header from '@/components/layouts/Header';
 import Title from '@/components/theme/TitleText';
 import Timeline from '@/components/Timeline';
-import { TimelineData } from '@/utils/Types';
+import { FestivalData, TimelineData } from '@/utils/Types';
 import FestStatus from '@/components/FestStatus';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/stores/store';
+import Entypo from '@expo/vector-icons/Entypo';
+import { Image } from 'expo-image';
 
 type ReviewType = {
   profile: string;
@@ -26,6 +30,9 @@ export default function Detail() {
   const [reviewList, setReviewList] = useState<ReviewType[]>([]);
   const [timeline, setTimeline] = useState<TimelineData[]>([]);
 
+  const festivalData = useSelector((state: RootState) => state.festivalData);
+  const reviewData = useSelector((state: RootState) => state.reviewData);
+
   // 데이터 불러오기
   const fetchData = async () => {
     setReviewList([]);
@@ -34,48 +41,7 @@ export default function Detail() {
   // 더미데이터 입력
   useEffect(() => {
     // 리뷰 더미데이터
-    setReviewList([
-      {
-        profile: 'asdojf',
-        nickname: 'user',
-        stars: 3,
-        content:
-          '아주 즐거웠고 가족들과 행복한 시간 보냈습니다. 행사장에 계시는 모든 스텝분들이 정말 친절하셨습니다. 중간중간 진행한 공연도 ...',
-        image: 'sdjfiosdjfiosjd',
-      },
-      {
-        profile: 'asdojf',
-        nickname: 'user',
-        stars: 3,
-        content:
-          '아주 즐거웠고 가족들과 행복한 시간 보냈습니다. 행사장에 계시는 모든 스텝분들이 정말 친절하셨습니다. 중간중간 진행한 공연도 ...',
-        image: 'sdjfiosdjfiosjd',
-      },
-      {
-        profile: 'asdojf',
-        nickname: 'user',
-        stars: 3,
-        content:
-          '아주 즐거웠고 가족들과 행복한 시간 보냈습니다. 행사장에 계시는 모든 스텝분들이 정말 친절하셨습니다. 중간중간 진행한 공연도 ...',
-        image: 'sdjfiosdjfiosjd',
-      },
-      {
-        profile: 'asdojf',
-        nickname: 'user',
-        stars: 3,
-        content:
-          '아주 즐거웠고 가족들과 행복한 시간 보냈습니다. 행사장에 계시는 모든 스텝분들이 정말 친절하셨습니다. 중간중간 진행한 공연도 ...',
-        image: 'sdjfiosdjfiosjd',
-      },
-      {
-        profile: 'asdojf',
-        nickname: 'user',
-        stars: 3,
-        content:
-          '아주 즐거웠고 가족들과 행복한 시간 보냈습니다. 행사장에 계시는 모든 스텝분들이 정말 친절하셨습니다. 중간중간 진행한 공연도 ...',
-        image: 'sdjfiosdjfiosjd',
-      },
-    ]);
+    // setReviewList();
     // 타임라인 더미데이터
     setTimeline([
       { title: '참가자 입장', time: '~ 17:00' },
@@ -94,13 +60,24 @@ export default function Detail() {
   return (
     <View className="flex-1">
       <Header
-        left={<Title>{'< 축제 개요'}</Title>}
-        right={
-          <View className="flex-row gap-3">
-            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
-            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
-          </View>
+        left={
+          <TouchableOpacity
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <View className="flex-row">
+              <Entypo name="chevron-small-left" size={24} color="black" />
+              <Title>{'축제 개요'}</Title>
+            </View>
+          </TouchableOpacity>
         }
+        // right={
+        //   <View className="flex-row gap-3">
+        //     <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+        //     <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+        //   </View>
+        // }
       />
       <ScrollView>
         {/* 축재 정보 */}
@@ -113,10 +90,10 @@ export default function Detail() {
               <FestStatus isOpen={true} />
             </View>
             <FontText className="text-xl font-bold">
-              2023 거창 마당 대축제
+              {festivalData.title}
             </FontText>
-            <FontText>거창 스포츠파크</FontText>
-            <FontText>2020-02-02 ~ 2023-03-03</FontText>
+            <FontText>{festivalData.subTitle}</FontText>
+            <FontText>{festivalData.date}</FontText>
           </View>
         </View>
         <Hr />
@@ -126,10 +103,10 @@ export default function Detail() {
           <View className="min-h-60 rounded-xl overflow-hidden bg-gray-200">
             <Map inPage />
           </View>
-          <View className="min-h-60 bg-gray-200 rounded-xl">
+          {/* <View className="min-h-60 bg-gray-200 rounded-xl">
             <FontText className="font-bold">인근 주차장</FontText>
             <FontText className="font-bold">대중교통</FontText>
-          </View>
+          </View> */}
         </View>
         <Hr />
         {/* 날씨? */}
@@ -140,8 +117,8 @@ export default function Detail() {
             onPress={goReview}
           >
             <Title>{`방문자 리뷰`}</Title>
-            <FontText>{reviewList.length}</FontText>
-            <FontText>{'>'}</FontText>
+            <FontText>{reviewData.length}</FontText>
+            <Entypo name="chevron-small-right" size={24} color="black" />
           </TouchableOpacity>
           <View className="flex-1">
             <ScrollView
@@ -152,8 +129,8 @@ export default function Detail() {
                 paddingHorizontal: 20,
               }}
             >
-              {reviewList.length !== 0 &&
-                reviewList.map((review, i) => (
+              {reviewData.length !== 0 &&
+                reviewData.map((review, i) => (
                   // 리뷰 카드
                   <View
                     className="w-72 shadow bg-white rounded-xl p-3 gap-5"
@@ -161,7 +138,17 @@ export default function Detail() {
                   >
                     {/* 프로필 */}
                     <View className="flex-row gap-3 items-center">
-                      <View className="h-16 w-16 bg-black rounded-full" />
+                      <View className="h-16 w-16 rounded-full bg-black overflow-hidden">
+                        <Image
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                          }}
+                          source={{
+                            uri: review.profile,
+                          }}
+                        />
+                      </View>
                       <View className="gap-2">
                         <FontText className="text-2xl font-bold">
                           {review.nickname}
@@ -171,8 +158,16 @@ export default function Detail() {
                     </View>
                     {/* 이미지, 내용 */}
                     <View className="flex-1 flex-row gap-3">
-                      {review.image && (
-                        <View className="h-[84] w-[84] rounded-xl bg-gray-400"></View>
+                      {review.contentImage.length !== 0 && (
+                        <View className="h-[84] w-[84] rounded-xl bg-gray-400 overflow-hidden">
+                          <Image
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                            }}
+                            source={{ uri: review.contentImage[0] }}
+                          />
+                        </View>
                       )}
                       <FontText
                         className="flex-1"
@@ -189,9 +184,9 @@ export default function Detail() {
         <View className="flex-1 p-5 min-h-72 gap-4">
           <View className="flex-row items-center gap-6">
             <Title>타임테이블</Title>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <FontText>11월 23일</FontText>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <Timeline timelineData={timeline} />
         </View>
