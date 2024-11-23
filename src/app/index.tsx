@@ -8,12 +8,12 @@ export default function App() {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => {
-      router.replace('/pages/Modal/MapModal');
+      router.replace('/pages/Account/Account');
     }, 1000);
   }, []);
   // 작업 테스트용 라우팅
 
-``
+
   return (
     <View>
       <Link href="/pages/Account/Account">Account</Link>
