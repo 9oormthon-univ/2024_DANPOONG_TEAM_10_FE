@@ -99,12 +99,12 @@ export default function Detail() {
     <View className="flex-1">
       <Header
         left={<Title>{'< 축제 개요'}</Title>}
-        right={
-          <View className="flex-row gap-3">
-            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
-            <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
-          </View>
-        }
+        // right={
+        //   <View className="flex-row gap-3">
+        //     <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+        //     <TouchableOpacity className="h-10 w-10 bg-gray-500 rounded-full"></TouchableOpacity>
+        //   </View>
+        // }
       />
       <ScrollView>
         {/* 축재 정보 */}
