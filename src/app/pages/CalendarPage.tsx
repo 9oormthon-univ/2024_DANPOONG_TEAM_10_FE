@@ -27,14 +27,15 @@ export default function CalendarPage() {
   // 드롭다운에 들어가는 옵션 (라벨, 값)
   const [yearItems, setYearItems] = useState<DropDownItems[]>([]);
   const [monthItems, setMonthItems] = useState<DropDownItems[]>([]);
-  const [date, setDate] = useState<number>(0);
 
-  // 달력의 현재 날짜
-  const [currentDate, setCurrentDate] = useState<string>('2000-01-01');
+  // 달력 페이지
+  const [calendarPage, setCalendarPage] = useState<string>('2000-01-01');
   // 달력 데이터 (월별 데이터)
-  const [calendarDataList, setCalendarDataList] = useState<CalendarData[]>([]);
+  const [monthData, setMonthData] = useState<CalendarData[]>([]);
   // 달력에 표시되는 마커 정보
   const [markedDate, setMarkedDate] = useState<MarkedDateType>();
+  // 선택한 날짜
+  const [date, setDate] = useState<string>('');
 
   // 년 드롭다운 열기
   const openYear = () => {
@@ -91,7 +92,7 @@ export default function CalendarPage() {
   LocaleConfig.defaultLocale = 'kr';
 
   // 좋아요 누른 날 스타일
-  const markedDateStyle: any = {
+  const likeDateStyle: any = {
     customStyles: {
       container: {
         backgroundColor: '#053C57',
@@ -104,8 +105,7 @@ export default function CalendarPage() {
     },
   };
   // 축제가 있는 날 스타일
-  const selectedDateStyle: any = {
-    selected: true,
+  const festDateStyle: any = {
     customStyles: {
       container: {
         backgroundColor: '#c7c7c7',
@@ -118,25 +118,38 @@ export default function CalendarPage() {
     },
   };
 
-  const dateClickHandler = () => {};
-  const eventClickHandler = () => {};
+  const selectedDateStyle: any = {
+    customStyles: {
+      container: {
+        backgroundColor: '#935c5c',
+      },
+      text: {
+        color: 'white',
+        fontWeight: 'bold',
+        textDecorationLine: 'underline',
+      },
+    },
+  };
 
   // 데이터 불러오기
-  const fetchData = async () => {
-    setCalendarDataList;
+  const fetchMonthData = async (year: number, month: number) => {
+    // setMonthData;
     // calendarData의 type에 맞춰서 좋아요/축제 스타일 설정하기
     setMarkedDate({
-      '2024-11-19': markedDateStyle,
-      '2024-11-23': selectedDateStyle,
-      '2024-11-20': markedDateStyle,
-      '2024-11-10': selectedDateStyle,
+      '2024-11-19': likeDateStyle,
+      '2024-11-23': festDateStyle,
+      '2024-11-20': likeDateStyle,
+      '2024-11-10': festDateStyle,
     });
   };
+
+  const fetchDayData = async () => {};
 
   // 년/월이 변경되면 날짜 변경
   useEffect(() => {
     const formatedMonth = month.length === 1 ? '0' + month : month;
-    setCurrentDate(`${year}-${formatedMonth}-01`);
+    setCalendarPage(`${year}-${formatedMonth}-01`);
+    fetchMonthData(parseInt(year), parseInt(month));
   }, [year, month]);
 
   // 첫 랜더링
@@ -145,6 +158,8 @@ export default function CalendarPage() {
     const today = new Date();
     const thisYear = today.getFullYear();
     const thisMonth = today.getMonth() + 1;
+    const thisDay = today.getDate();
+
     setYear(thisYear.toString());
     setMonth(thisMonth.toString());
     // 2000년 이후 ~ 현재 년도 + 10년
@@ -171,9 +186,11 @@ export default function CalendarPage() {
     });
     setMonthItems(monthArray);
 
-    fetchData();
     // 현재 날짜로 초기화 (렌더링 문제때문에 해야함)
-    setCurrentDate(new Date('2000-01-01').toString());
+    setCalendarPage(new Date().toString());
+    setDate(`${thisYear}. ${thisMonth}. ${thisDay}`);
+
+    fetchMonthData(thisYear, thisMonth);
   }, []);
 
   return (
@@ -230,8 +247,8 @@ export default function CalendarPage() {
       {/* 달력 */}
       <View className="px-5">
         <Calendar
-          current={currentDate}
-          key={currentDate}
+          current={calendarPage}
+          key={calendarPage}
           renderHeader={() => null}
           hideArrows={true}
           markingType={'custom'}
@@ -239,20 +256,15 @@ export default function CalendarPage() {
           theme={{
             textDayHeaderFontSize: 20,
             textDayHeaderFontWeight: 'bold',
-            // todayTextColor: '#053C57',
-            todayTextColor: '#ffffff',
-            todayBackgroundColor: '#c82a2a',
           }}
           onDayPress={(day) => {
-            setDate(day.day);
+            setDate(`${day.year}. ${day.month}. ${day.day}`);
           }}
         />
       </View>
       <View className="flex-1 h-full p-5">
         <View className="flex-1 p-5 bg-gray-300 rounded-xl">
-          <FontText className="font-bold text-2xl">
-            {currentDate.split('-').join('. ')}
-          </FontText>
+          <FontText className="font-bold text-2xl">{date}</FontText>
           <ScrollView>
             {/* 월별 데이터의 date에 맞게 데이터 리스트 */}
           </ScrollView>
