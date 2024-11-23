@@ -7,7 +7,7 @@ export default function Navbar() {
   const router = useRouter();
 
   const onEventPageClick = () => {
-    router.replace('/pages/Event');
+    router.replace('/pages/EventPage');
   };
   const onLikeClick = () => {
     router.replace('/pages/LikePage');
