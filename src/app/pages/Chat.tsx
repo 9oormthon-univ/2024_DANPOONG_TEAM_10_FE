@@ -4,6 +4,9 @@ import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { FlatList, TextInput, TouchableOpacity, View } from 'react-native';
 
+import ChatLeftSvg from '@/components/svgs/ChatLeftSvg';
+import ChatRightSvg from '@/components/svgs/ChatRightSvg';
+
 type ChatData = {
   nickname: string;
   profile: string;
@@ -28,7 +31,6 @@ export default function Chat() {
   };
 
   useEffect(() => {
-    console.log(ChatLeftSvg);
     setChatData([
       {
         nickname: '유저',
@@ -199,17 +201,19 @@ export default function Chat() {
     <View>
       {/* 첫 메시지면 프로필 띄움 */}
       {item.isFirst && (
-        <View className="flex-row items-center gap-3">
+        <View className="flex-row items-center gap-3 mb-3">
           <View className="h-10 w-10 bg-gray-500 rounded-full"></View>
           <FontText>{item.nickname}</FontText>
         </View>
       )}
 
       {item.isFirst && (
-        <View className="w-5 h-5  absolute top-[50] left-[4] bg-red-500"></View>
+        <View className="w-5 h-5 absolute top-[50] left-[4]">
+          <ChatLeftSvg height={20} width={20} color={'#aaaaaa'} />
+        </View>
       )}
-      <View className="flex-row mt-3 justify-start items-end gap-3 ml-5  w-full">
-        <FontText className="bg-gray-400 p-2 rounded-xl max-w-[70%]">
+      <View className="flex-row mb-3 justify-start items-end gap-3 ml-5  w-full">
+        <FontText className="bg-gray-400 p-3 rounded-xl max-w-[70%]">
           {item.message}
         </FontText>
         {/* 마지막 메시지면 시간 띄움 */}
@@ -220,12 +224,14 @@ export default function Chat() {
   const thisUser = (item: ChatData) => (
     <View>
       {item.isFirst && (
-        <View className="w-5 h-5 bg-blue-300 absolute top-[14] right-[5]" />
+        <View className="w-5 h-5 absolute top-[14] right-[5]">
+          <ChatRightSvg height={20} width={20} color={'#7bcfff'} />
+        </View>
       )}
-      <View className="flex-row justify-end items-end mt-3 gap-3">
+      <View className="flex-row justify-end items-end mb-3 gap-3">
         {/* 마지막 메시지면 시간 띄움 */}
-        {item.isLast ? <FontText>{item.date.toString()}</FontText> : null}
-        <FontText className="bg-blue-300 mr-5 p-2 rounded-xl max-w-[70%]">
+        {item.isLast && <FontText>{item.date.toString()}</FontText>}
+        <FontText className="bg-blue-300 mr-5 p-3 rounded-xl max-w-[70%]">
           {item.message}
         </FontText>
       </View>
